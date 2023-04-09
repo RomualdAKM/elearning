@@ -5,7 +5,9 @@ import pagesHomeQuiz from '../components/pages/home/quiz.vue'
 import pagesHomeLogin from '../components/pages/home/login.vue'
 import pagesHomeRegister from '../components/pages/home/register.vue'
 import pagesHomesBook from '../components/pages/home/book.vue'
+import pagesHomeBookDetail from '../components/pages/home/bookdetail.vue'
 import notFound from '../components/notFound.vue'
+
 
 
 
@@ -68,6 +70,18 @@ const routes = [
         }
 
     },
+
+    {
+        name: 'BookDetail',
+        path: '/library/:bookName',
+        component: pagesHomeBookDetail,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+
 
     {
         path: '/:pathMatch(.*)*',

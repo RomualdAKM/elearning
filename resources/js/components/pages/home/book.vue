@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue"
 
 const booksLevel = ref([])
 const level_id = ref()
+const searchBook = ref()
 
 
 
@@ -12,6 +13,18 @@ const getBooksInLevel = async () => {
     console.log('books', response.data.booksLevel)
     booksLevel.value = response.data.booksLevel
 }
+
+//rechercher livre
+const search = async () => {
+
+    let response = await axios.get('/api/search_book?s='+searchBook.value)
+    booksLevel.value = response.data.book
+
+    console.log('searchCategory', response.data.book)
+
+}
+
+
 onMounted(  () =>
 {
    // Pour accéder aux informations de l'utilisateur connecté
@@ -25,8 +38,11 @@ onMounted(  () =>
     console.log('info',response.data.level_id);
 
     // Appel de la fonction getBooksInLevel() ici
-  getBooksInLevel()
-});
+        getBooksInLevel()
+       
+    })
+
+
 })
 </script>
 
@@ -59,12 +75,11 @@ Page Banner START -->
 							<p class="mb-3">Expand knowledge by reading book Two before narrow not relied on how except moment myself Dejection assurance. </p>
 
 							<!-- Search -->
-							<form class="bg-body rounded p-2">
+							<div class="bg-body rounded p-2">
 								<div class="input-group">
-									<input class="form-control border-0 me-1" type="search" placeholder="Search book">
-									<button type="button" class="btn btn-primary mb-0 rounded">Search</button>
+									<input v-model="searchBook" @keyup="search()" class="form-control border-0 me-1" type="search" placeholder="Search book">
 								</div>
-							</form>
+							</div>
 						</div>
 
 						<!-- Image -->
@@ -88,32 +103,6 @@ Page content START -->
 			<!-- Main content START -->
 			<div class="col-12">
 
-				<!-- Search option START -->
-				<div class="row mb-4 align-items-center">
-
-					<!-- Title -->
-					<div class="col-md-4">
-						<h5 class="mb-0">All Listed Books</h5>
-					</div>
-
-
-					<!-- Select option -->
-					<div class="col-md-4 mt-3 mt-xl-0">
-						<form class="border-bottom p-2 input-borderless">
-							<select class="js-choice">
-								<option value="">Select category</option>
-								<option>Software</option>
-								<option>Finance</option>
-								<option>Web design</option>
-								<option>Web Development</option>
-								<option>Information technology</option>
-								<option>Science</option>
-							</select>
-						</form>
-					</div>
-
-				</div>
-				<!-- Search option END -->
 
 				<!-- Book Grid START -->
 				<div class="row g-4" v-for="item in booksLevel" :key="item.id">
@@ -140,7 +129,9 @@ Page content START -->
 							<div class="card-body px-3">
 								<!-- Title -->
 								<h5 class="card-title mb-0">
-									<a href="shop-product-detail.html" class="stretched-link">{{book.name}}</a>
+									<router-link  class="stretched-link" :to="{name: 'BookDetail',params:{bookName:book.name}}">
+                                        {{book.name}}
+                                    </router-link>
 								</h5>
 							</div>
 

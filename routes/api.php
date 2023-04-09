@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\SubjectController;
@@ -50,6 +52,15 @@ Route::controller(LevelController::class)->group(function ()
 {
     Route::get('get_levels', 'get_levels');
     Route::get('get_books_in_level/{levelId}', 'get_books_in_level');
+});
+
+Route::controller(BookController::class)->group(function(){
+
+    Route::get('get_detail_book/{bookName}', 'get_detail_book');
+    Route::get('search_book', 'search_book');
+
 
 
 });
+
+
