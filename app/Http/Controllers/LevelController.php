@@ -31,7 +31,27 @@ class LevelController extends Controller
         ],200);
     }
 
+    public function search_book(Request $request)
+    {
 
-    
+        $search = $request->get('s');
+
+        if ($search != null) {
+
+           // $book = level::where('name', 'LIKE', "%$search%")->with('books')->get();
+
+           $book = level::with('books')
+            ->whereHas('books', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%");
+            })
+
+            ->get();
+
+            return response()->json([
+                'book' => $book
+            ], 200);
+        }
+    }
+
 
 }

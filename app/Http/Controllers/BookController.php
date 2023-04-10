@@ -17,18 +17,5 @@ class BookController extends Controller
 
     }
 
-    public function search_book(Request $request)
-    {
-
-        $search = $request->get('s');
-
-        if ($search != null) {
-
-            $book = book::where('name', 'LIKE', "%$search%")->with('category')->get();
-
-            return response()->json([
-                'book' => $book
-            ], 200);
-        }
-    }
+   
 }

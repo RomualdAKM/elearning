@@ -52,12 +52,13 @@ Route::controller(LevelController::class)->group(function ()
 {
     Route::get('get_levels', 'get_levels');
     Route::get('get_books_in_level/{levelId}', 'get_books_in_level');
+    Route::get('search_book', 'search_book');
+
 });
 
 Route::controller(BookController::class)->group(function(){
 
     Route::get('get_detail_book/{bookName}', 'get_detail_book');
-    Route::get('search_book', 'search_book');
 
 
 

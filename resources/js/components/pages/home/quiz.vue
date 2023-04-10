@@ -41,12 +41,15 @@ const finishQuiz = () => {
     })
     score.value = userScore
     quizCompleted.value = true
+
     if (unansweredQuestions.length > 0) {
-        let unansweredQuestionsText = "Listes des mauvaises questiohs:\n\n"
+        let unansweredQuestionsText = "Votre score est de : " + score.value + "/" + quizzes.value.length + "\n\n"
+            + "Listes des mauvaises questions:\n"
         unansweredQuestions.forEach((quiz, index) => {
             unansweredQuestionsText += `${index + 1}. ${quiz.question}\n`
         })
-        alert(unansweredQuestionsText)
+
+        Swal.fire(unansweredQuestionsText)
     }
 }
 
