@@ -2,6 +2,8 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
+import myBase from '../../mybase.vue'
+
 
 const route = useRoute()
 
@@ -61,6 +63,8 @@ onMounted(async () => {
 </script>
 <template>
     <div class="container">
+            <my-base></my-base>
+
         <div v-if="!quizCompleted">
             <div v-if="quizzes.length > 0">
                 <div v-for="(quiz, index) in quizzes" :key="quiz.id" v-show="index === currentQuestionIndex">

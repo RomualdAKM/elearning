@@ -53,6 +53,9 @@ Route::controller(LevelController::class)->group(function ()
     Route::get('get_levels', 'get_levels');
     Route::get('get_books_in_level/{levelId}', 'get_books_in_level');
     Route::get('search_book', 'search_book');
+    Route::post('create_level', 'create_level');
+    Route::post('update_level/{id}', 'update_level');
+    Route::get('delete_level/{id}', 'delete_level');
 
 });
 

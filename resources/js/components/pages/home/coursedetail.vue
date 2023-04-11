@@ -1,6 +1,8 @@
 <script setup>
 import { onMounted,ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import myBase from '../../mybase.vue'
+
 
 const route = useRoute()
 const name = ref(route.params.name)
@@ -51,6 +53,7 @@ onMounted(() => {
 
 <template>
   <div>
+        <my-base></my-base>
 
      <!-- **************** MAIN CONTENT START **************** -->
 

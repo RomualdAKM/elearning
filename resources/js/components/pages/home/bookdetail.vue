@@ -2,6 +2,7 @@
 
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import myBase from '../../mybase.vue'
 
 const route = useRoute()
 
@@ -23,7 +24,10 @@ onMounted(async () => {
 
 <template>
 
-    <!-- **************** MAIN CONTENT START **************** -->
+  <div>
+        <my-base></my-base>
+
+      <!-- **************** MAIN CONTENT START **************** -->
     <main>
         <!-- =======================
 Page content START -->
@@ -108,4 +112,5 @@ Page content START -->
 Page content END -->
     </main>
     <!-- **************** MAIN CONTENT END **************** -->
+  </div>
 </template>

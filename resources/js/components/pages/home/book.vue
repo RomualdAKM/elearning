@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue"
+import myBase from '../../mybase.vue'
 
 const booksLevel = ref([])
 const level_id = ref()
@@ -47,7 +48,9 @@ onMounted(  () =>
 </script>
 
 <template>
-    <!-- **************** MAIN CONTENT START **************** -->
+  <div>
+    <my-base></my-base>
+      <!-- **************** MAIN CONTENT START **************** -->
 <main>
 
 <!-- =======================
@@ -243,5 +246,6 @@ Action box END -->
 
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
+  </div>
 
 </template>

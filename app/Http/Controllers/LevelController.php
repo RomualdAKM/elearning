@@ -53,5 +53,32 @@ class LevelController extends Controller
         }
     }
 
+        public function create_level(Request $request){
 
+           $this->validate($request,
+            ['name' => 'required']);
+
+            $level = new level();
+            $level->name = $request->name;
+            $level->save();
+
+        }
+
+        public function update_level(Request $request, $id){
+
+         $level = level::find($id);
+
+            $this->validate($request,
+                ['name' =>'required']);
+
+                $level->name = $request->name;
+                $level->save();
+
+        }
+
+        public function delete_level($id){
+            $level = level::findOrFail($id);
+            $level->delete();
+
+        }
 }

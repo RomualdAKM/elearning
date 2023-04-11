@@ -23,8 +23,8 @@ onMounted(getSubjects)
 </script>
 
 <template>
-    <div>
-        <header class="navbar-light navbar-sticky">
+
+<header class="navbar-light navbar-sticky">
 	<!-- Nav START -->
 	<nav class="navbar navbar-expand-xl z-index-9">
 		<div class="container">
@@ -218,5 +218,5 @@ onMounted(getSubjects)
 	<!-- Category Nav link END -->
 
 </header>
-    </div>
+ 
 </template>
