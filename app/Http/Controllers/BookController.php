@@ -17,5 +17,95 @@ class BookController extends Controller
 
     }
 
-   
+    public function get_books()
+    {
+
+        $books = book::all();
+
+        return response()->json([
+            'books' => $books
+        ]);
+    }
+
+    public function create_book(Request $request)
+    {
+
+        $this->validate(
+            $request,
+            ['name' => 'required',
+                'file' => 'required',
+                'image' => 'required']
+        );
+
+        $image = '';
+        if ($request->hasFile('image')) {
+            $photo = $request->file('image');
+            $file_image = time() . '.' . $photo->getClientOriginalName();
+            $photo->move(public_path('img'), $file_image);
+            $image = 'img' . $file_image;
+        }
+
+        $pdf = '';
+        if ($request->hasFile('file')) {
+            $p = $request->file('file');
+            $file = time() . '.' . $p->getClientOriginalName();
+            $p->move(public_path('pdf'), $file);
+            $pdf = 'pdf' . $file;
+        }
+
+
+        $book = new book();
+        $book->name = $request->name;
+        $book->file = $pdf;
+        $book->description = $request->description;
+        $book->image = $image;
+        $book->category_id = $request->category_id;
+        $book->level_id = $request->level_id;
+        $book->save();
+    }
+
+    public function update_book(Request $request, $id)
+    {
+
+        $book = book::find($id);
+
+        $this->validate(
+            $request,
+            [
+                'name' => 'required',
+                'file' => 'required',
+                'image' => 'required'
+            ]
+        );
+
+        $image = '';
+        if ($request->hasFile('image')) {
+            $photo = $request->file('image');
+            $file_image = time() . '.' . $photo->getClientOriginalName();
+            $photo->move(public_path('img'), $file_image);
+            $image = 'img' . $file_image;
+        }
+
+        $pdf = '';
+        if ($request->hasFile('file')) {
+            $p = $request->file('file');
+            $file = time() . '.' . $p->getClientOriginalName();
+            $p->move(public_path('pdf'), $file);
+            $pdf = 'pdf' . $file;
+        }
+
+        $book->name = $request->name;
+        $book->file = $pdf;
+        $book->description = $request->description;
+        $book->image = $image;
+        $book->category_id = $request->category_id;
+        $book->level_id = $request->level_id;
+        $book->save();
+    }
+
+    public function delete_book($id)
+    {
+        $book = book::findOrFail($id);
+        $book->delete();
+    }
 }

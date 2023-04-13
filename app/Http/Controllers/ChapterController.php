@@ -16,4 +16,16 @@ class ChapterController extends Controller
         'quizzes' => $quizzes
     ]);
     }
+
+    public function get_chapters(){
+
+        $chapters = chapter::all();
+
+        return response()->json([
+            
+            'chapters' => $chapters
+
+        ]);
+
+    }
 }

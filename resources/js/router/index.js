@@ -9,6 +9,10 @@ import pagesHomeBookDetail from '../components/pages/home/bookdetail.vue'
 
 //admin
 import pagesAdminLevel from '../components/pages/admin/level.vue'
+import pagesAdminQuiz from '../components/pages/admin/quiz.vue'
+import pagesAdminLearning from '../components/pages/admin/learning.vue'
+import pagesAdminCategory from '../components/pages/admin/category.vue'
+import pagesAdminBook from '../components/pages/admin/book.vue'
 
 
 import notFound from '../components/notFound.vue'
@@ -97,6 +101,47 @@ const routes = [
         }
 
     },
+
+    {
+        name: 'Quiz',
+        path: '/admin/quiz',
+        component: pagesAdminQuiz,
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+
+    {
+        name: 'Learning',
+        path: '/admin/learning',
+        component: pagesAdminLearning,
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+
+    {
+        name: 'Category',
+        path: '/admin/category',
+        component: pagesAdminCategory,
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+    {
+        name: 'Book',
+        path: '/admin/book',
+        component: pagesAdminBook,
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+
+
     {
         path: '/:pathMatch(.*)*',
         component: notFound,

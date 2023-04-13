@@ -9,7 +9,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\LearningController;
-
+use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,11 +40,19 @@ Route::controller(SubjectController::class)->group(function () {
 Route::controller(LearningController::class)->group(function () {
 
     Route::get('get_learning/{name}', 'get_learning');
+    //admin
+    Route::get('get_learnings', 'get_learnings');
+
+    Route::post('create_learning', 'create_learning');
+    Route::post('update_learning/{id}', 'update_learning');
+    Route::get('delete_learning/{id}', 'delete_learning');
 });
 
 Route::controller(ChapterController::class)->group(function () {
     Route::get('get_chaptervideos/{id}', 'get_chaptervideos');
     Route::get('get_quizzes/{name}', 'get_quizzes');
+    //admin
+    Route::get('get_chapters', 'get_chapters');
 
 });
 
@@ -53,6 +61,7 @@ Route::controller(LevelController::class)->group(function ()
     Route::get('get_levels', 'get_levels');
     Route::get('get_books_in_level/{levelId}', 'get_books_in_level');
     Route::get('search_book', 'search_book');
+    //admin
     Route::post('create_level', 'create_level');
     Route::post('update_level/{id}', 'update_level');
     Route::get('delete_level/{id}', 'delete_level');
@@ -63,8 +72,29 @@ Route::controller(BookController::class)->group(function(){
 
     Route::get('get_detail_book/{bookName}', 'get_detail_book');
 
-
+    //admin
+    Route::get('get_books', 'get_books');
+    Route::post('create_book', 'create_book');
+    Route::post('update_book/{id}', 'update_book');
+    Route::get('delete_book/{id}', 'delete_book');
 
 });
 
+Route::controller(QuizController::class)->group(function(){
+    //admin
+    Route::get('get_quizzes','get_quizzes');
+    Route::post('create_quiz', 'create_quiz');
+    Route::post('update_quiz/{id}', 'update_quiz');
+    Route::get('delete_quiz/{id}', 'delete_quiz');
+
+});
+
+Route::controller(CategoryController::class)->group(function(){
+
+    //admin
+    Route::get('get_categories', 'get_categories');
+    Route::post('create_category', 'create_category');
+    Route::post('update_category/{id}', 'update_category');
+    Route::get('delete_category/{id}', 'delete_category');
+});
 
