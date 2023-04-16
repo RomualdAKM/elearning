@@ -56,7 +56,6 @@ Page Banner START -->
 							<h1 class="mb-3">Welcome to our online book store!</h1>
 							<p class="mb-3">Expand knowledge by reading book Two before narrow not relied on how except moment myself Dejection assurance. </p>
 
-							
 						</div>
 
 						<!-- Image -->
