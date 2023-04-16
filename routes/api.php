@@ -26,7 +26,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::controller(AuthController::class)
     ->group(function () {
         Route::post('login', 'login');
@@ -34,7 +33,11 @@ Route::controller(AuthController::class)
     });
 
 Route::controller(SubjectController::class)->group(function () {
-    Route::get('get_subjects', 'get_subjects');
+    Route::get('get_subjects/{id}', 'get_subjects');
+    //admin
+    Route::post('create_subject', 'create_subject');
+    Route::post('update_subject/{id}', 'update_subject');
+    Route::get('delete_subject/{id}', 'delete_subject');
 });
 
 Route::controller(LearningController::class)->group(function () {
@@ -53,6 +56,9 @@ Route::controller(ChapterController::class)->group(function () {
     Route::get('get_quizzes/{name}', 'get_quizzes');
     //admin
     Route::get('get_chapters', 'get_chapters');
+    Route::post('create_chapter', 'create_chapter');
+    Route::post('update_chapter/{id}', 'update_chapter');
+    Route::get('delete_chapter/{id}', 'delete_chapter');
 
 });
 
@@ -61,6 +67,7 @@ Route::controller(LevelController::class)->group(function ()
     Route::get('get_levels', 'get_levels');
     Route::get('get_books_in_level/{levelId}', 'get_books_in_level');
     Route::get('search_book', 'search_book');
+
     //admin
     Route::post('create_level', 'create_level');
     Route::post('update_level/{id}', 'update_level');

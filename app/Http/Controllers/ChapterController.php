@@ -22,10 +22,80 @@ class ChapterController extends Controller
         $chapters = chapter::all();
 
         return response()->json([
-            
+
             'chapters' => $chapters
 
         ]);
 
+    }
+
+    public function create_chapter(Request $request)
+    {
+
+        $this->validate(
+            $request,
+            [
+                'name' => 'required',
+                'file' => 'required',
+                'url' => 'required'
+            ]
+        );
+
+
+        $pdf = '';
+        if ($request->hasFile('file')) {
+            $p = $request->file('file');
+            $file = time() . '.' . $p->getClientOriginalName();
+            $p->move(public_path('pdf'), $file);
+            $pdf = 'pdf' . $file;
+        }
+
+
+        $chapter = new chapter();
+        $chapter->name = $request->name;
+        $chapter->file = $pdf;
+        $chapter->description = $request->description;
+        $chapter->url = $request->url;
+        $chapter->learning_id = $request->learning_id;
+        $chapter->save();
+    }
+
+    public function update_chapter(Request $request, $id)
+    {
+
+        $chapter = chapter::find($id);
+
+        $this->validate(
+            $request,
+            [
+                'name' => 'required',
+                'file' => 'required',
+                'url' => 'required'
+            ]
+        );
+
+
+        $pdf = '';
+        if ($request->hasFile('file')) {
+            $p = $request->file('file');
+            $file = time() . '.' . $p->getClientOriginalName();
+            $p->move(public_path('pdf'), $file);
+            $pdf = 'pdf' . $file;
+        }
+
+
+
+        $chapter->name = $request->name;
+        $chapter->file = $pdf;
+        $chapter->description = $request->description;
+        $chapter->url = $request->url;
+        $chapter->learning_id = $request->learning_id;
+        $chapter->save();
+    }
+
+    public function delete_chapter($id)
+    {
+        $chapter = chapter::findOrFail($id);
+        $chapter->delete();
     }
 }

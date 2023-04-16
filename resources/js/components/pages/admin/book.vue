@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import sideBar from './sidebar.vue'
 
 const books = ref([])
 const levels = ref([])
@@ -158,37 +159,12 @@ Main Banner START -->
                                 >
                                     <div>
                                         <h1 class="my-1 fs-4">
-                                            Lori Stevens
+                                            Admin
                                             <i
                                                 class="bi bi-patch-check-fill text-info small"
                                             ></i>
                                         </h1>
-                                        <ul class="list-inline mb-0">
-                                            <li
-                                                class="list-inline-item h6 fw-light me-3 mb-1 mb-sm-0"
-                                            >
-                                                <i
-                                                    class="fas fa-star text-warning me-2"
-                                                ></i
-                                                >4.5/5.0
-                                            </li>
-                                            <li
-                                                class="list-inline-item h6 fw-light me-3 mb-1 mb-sm-0"
-                                            >
-                                                <i
-                                                    class="fas fa-user-graduate text-orange me-2"
-                                                ></i
-                                                >12k Enrolled Students
-                                            </li>
-                                            <li
-                                                class="list-inline-item h6 fw-light me-3 mb-1 mb-sm-0"
-                                            >
-                                                <i
-                                                    class="fas fa-book text-purple me-2"
-                                                ></i
-                                                >25 Courses
-                                            </li>
-                                        </ul>
+
                                     </div>
                                     <!-- Button -->
                                     <!-- Button -->
@@ -240,12 +216,16 @@ Inner part START -->
         <section class="pt-0">
             <div class="container">
                 <div class="row">
-                    <side-bar></side-bar>
+                     <side-bar></side-bar>
+
                     <!-- Main content START -->
                     <div class="col-xl-9">
+
                         <!-- Card START -->
                         <div class="card border bg-transparent rounded-3">
                             <!-- Card header START -->
+
+
                             <div
                                 class="card-header bg-transparent border-bottom"
                             >

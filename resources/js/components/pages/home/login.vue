@@ -13,7 +13,7 @@ const login = async () => {
     await axios.post("api/login", form).then((response) => {
         if (response.data.success) {
             localStorage.setItem("token", response.data.data.token);
-            router.push("/index");
+            router.push("/");
         } else {
             error.value = response.data.message;
         }

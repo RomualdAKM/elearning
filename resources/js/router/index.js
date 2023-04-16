@@ -8,11 +8,14 @@ import pagesHomesBook from '../components/pages/home/book.vue'
 import pagesHomeBookDetail from '../components/pages/home/bookdetail.vue'
 
 //admin
+import pagesAdmin from '../components/pages/admin/dashboard.vue'
 import pagesAdminLevel from '../components/pages/admin/level.vue'
 import pagesAdminQuiz from '../components/pages/admin/quiz.vue'
 import pagesAdminLearning from '../components/pages/admin/learning.vue'
 import pagesAdminCategory from '../components/pages/admin/category.vue'
 import pagesAdminBook from '../components/pages/admin/book.vue'
+import pagesAdminChapter from '../components/pages/admin/chapter.vue'
+import pagesAdminSubject from '../components/pages/admin/subject.vue'
 
 
 import notFound from '../components/notFound.vue'
@@ -22,11 +25,11 @@ import notFound from '../components/notFound.vue'
 
 const routes = [
     {
-        path: '/index',
+        path: '/',
         name: 'Index',
         component: pagesHomeHeader,
         meta: {
-            requiresAuth: true
+            requiresAuth: false
         }
     },
 
@@ -103,7 +106,7 @@ const routes = [
     },
 
     {
-        name: 'Quiz',
+        name: 'quiz',
         path: '/admin/quiz',
         component: pagesAdminQuiz,
         meta: {
@@ -131,8 +134,9 @@ const routes = [
         }
 
     },
+
     {
-        name: 'Book',
+        name: 'book',
         path: '/admin/book',
         component: pagesAdminBook,
         meta: {
@@ -141,6 +145,35 @@ const routes = [
 
     },
 
+    {
+        name: 'Chapter',
+        path: '/admin/chapter',
+        component: pagesAdminChapter,
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+    {
+        name: 'Dashboard',
+        path: '/admin',
+        component: pagesAdmin,
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+
+    {
+        name: 'subject',
+        path: '/admin/subject',
+        component: pagesAdminSubject,
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+    
 
     {
         path: '/:pathMatch(.*)*',
@@ -157,13 +190,13 @@ const router = createRouter({
 
 })
 
-router.beforeEach((to, from) => {
+router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth && !localStorage.getItem('token')) {
-        return { name: 'Login' }
+        next({ name: 'Login' })
     }
 
-    if (to.meta.requiresAuth == false && localStorage.getItem('token')) {
-        return { name: 'Detailducours' }
+    else {
+        next()
     }
 })
 

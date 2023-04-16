@@ -44,7 +44,6 @@ class LevelController extends Controller
             ->whereHas('books', function ($query) use ($search) {
                 $query->where('name', 'LIKE', "%$search%");
             })
-
             ->get();
 
             return response()->json([

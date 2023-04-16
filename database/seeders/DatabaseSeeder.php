@@ -22,13 +22,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       /*  level::factory(6)->create();
+        level::factory(6)->create();
         subject::factory(7)->create();
         learning::factory(5)->create();
         chapter::factory(40)->create();
         quiz::factory(40)->create();
         User::factory(3)->create();
-        */
         category::factory(5)->create();
         book::factory(25)->create();
 

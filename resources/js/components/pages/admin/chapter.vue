@@ -4,51 +4,88 @@ import axios from "axios";
 import sideBar from './sidebar.vue'
 
 
-const categories = ref([]);
-const editMode = ref(false);
+
+const learnings = ref([])
+const chapters = ref([])
+const editMode = ref(false)
 const form = ref({
     name: "",
-});
+    description: "",
+    learning_id: "",
+    url: "",
 
-const getCategories = async () => {
-    let response = await axios.get("/api/get_categories");
-    console.log("categories", response.data.categories);
-    categories.value = response.data.categories;
+})
+
+const file = ref(null)
+
+
+const onFile = (e) => {
+    file.value = e.target.files[0]
+}
+
+const getLearnings = async () => {
+    let response = await axios.get('/api/get_learnings')
+    console.log('learnings', response.data.learnings)
+    learnings.value = response.data.learnings
+}
+
+
+const getChapters = async () => {
+    let response = await axios.get("/api/get_chapters");
+    console.log("chapters", response.data.chapters);
+    chapters.value = response.data.chapters;
 };
 
-const createNewCategory = async () => {
-    await axios.post("/api/create_category", form.value).then((response) => {
-        getCategories();
+const createNewChapter = async () => {
+      const formData = new FormData();
+      formData.append('name', form.value.name);
+      formData.append('file', file.value);
+      formData.append('description', form.value.description);
+      formData.append('url', form.value.url);
+      formData.append('learning_id', form.value.learning_id);
+
+    await axios.post("/api/create_chapter", formData).then((response) => {
+        getChapters();
         form.value = {};
+        file.value = {}
         editMode.value = false;
         toast.fire({
             icon: "success",
-            title: "Category add Successfully",
+            title: "Chapter add Successfully",
         });
         console.log(response);
     });
 };
 
-const editModal = (Category) => {
+const editModal = (chapter) => {
     editMode.value = true;
-    form.value = Category;
+    form.value = chapter;
 };
 
-const updateCategory = async () => {
+const updateChapter = async () => {
+    const formData = new FormData();
+      formData.append('name', form.value.name);
+      formData.append('file', file.value);
+      formData.append('description', form.value.description);
+      formData.append('url', form.value.url);
+      formData.append('learning_id', form.value.learning_id);
+
     await axios
-        .post("/api/update_category/" + form.value.id, form.value)
+        .post("/api/update_chapter/" + form.value.id, formData)
         .then(() => {
-            getCategories();
+            getChapters();
             form.value = {};
+            file.value = {}
             editMode.value = false;
             toast.fire({
                 icon: "success",
-                title: "Category update Successfully",
+                title: "Learning update Successfully",
             });
         });
 };
 
-const deleteCategory = (id) => {
+
+const deleteChapter = (id) => {
     Swal.fire({
         title: "Are you sure ?",
         text: "You can't go back",
@@ -59,16 +96,21 @@ const deleteCategory = (id) => {
         confirmButtonText: "Yes, delete it !",
     }).then((result) => {
         if (result.value) {
-            axios.get("/api/delete_category/" + id).then(() => {
-                Swal.fire("Delete", "Category delete successfully", "success");
-                getCategories();
+            axios.get("/api/delete_chapter/" + id).then(() => {
+                Swal.fire("Delete", "chapter delete successfully", "success");
+                getChapters();
             });
         }
     });
 };
 
+
+
 onMounted(async () => {
-    getCategories();
+    getChapters()
+    getLearnings()
+
+
 });
 </script>
 
@@ -78,17 +120,11 @@ onMounted(async () => {
         <!-- =======================
 Main Banner START -->
         <section class="pt-0">
-            <!-- Main banner background image -->
-            <div class="container-fluid px-0">
-                <div
-                    class="bg-blue h-100px h-md-200px rounded-0"
-                    style="
-                        background: url(assets/images/pattern/04.png) no-repeat
-                            center center;
-                        background-size: cover;
-                    "
-                ></div>
-            </div>
+           <!-- Main banner background image -->
+	<div class="container-fluid px-0">
+		<div class="bg-blue h-100px h-md-200px rounded-0" style="background:url(assets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+		</div>
+	</div>
             <div class="container mt-n4">
                 <div class="row">
                     <!-- Profile banner START -->
@@ -111,7 +147,7 @@ Main Banner START -->
                                 >
                                     <div>
                                         <h1 class="my-1 fs-4">
-                                            Admin
+                                           Admin
                                             <i
                                                 class="bi bi-patch-check-fill text-info small"
                                             ></i>
@@ -128,7 +164,7 @@ Main Banner START -->
                                             class="btn btn-sm btn-primary mb-0"
                                             data-bs-toggle="modal"
                                             data-bs-target="#addQuiz"
-                                            >Ajoutez une nouvelle Category</a
+                                            >Ajoutez chapitre</a
                                         >
                                     </div>
                                 </div>
@@ -177,7 +213,7 @@ Inner part START -->
                             <div
                                 class="card-header bg-transparent border-bottom"
                             >
-                                <h3 class="mb-0">Liste des categories</h3>
+                                <h3 class="mb-0">Liste des chaptres</h3>
                             </div>
                             <!-- Card header END -->
 
@@ -212,7 +248,7 @@ Inner part START -->
                                 <!-- Course list table START -->
                                 <div class="table-responsive border-0">
                                     <table
-                                        class="table table-dark-gray align-middle p-4 mb-0 table-hover"
+                                        class="table table-dark-gray align-middle  p-4 mb-0 table-hover"
                                     >
                                         <!-- Table head -->
                                         <thead>
@@ -221,21 +257,9 @@ Inner part START -->
                                                     scope="col"
                                                     class="border-0 rounded-start"
                                                 >
-                                                    Id
-                                                </th>
-                                                <th
-                                                    scope="col"
-                                                    class="border-0"
-                                                >
                                                     Nom
                                                 </th>
 
-                                                <th
-                                                    scope="col"
-                                                    class="border-0"
-                                                >
-                                                    Date Creation
-                                                </th>
                                                 <th
                                                     scope="col"
                                                     class="border-0 rounded-end"
@@ -249,8 +273,8 @@ Inner part START -->
                                         <tbody>
                                             <!-- Table item -->
                                             <tr
-                                                v-for="category in categories"
-                                                :key="category.id"
+                                                v-for="chapter in chapters"
+                                                :key="chapter.id"
                                             >
                                                 <!-- Course item -->
                                                 <td>
@@ -260,23 +284,9 @@ Inner part START -->
                                                         <div class="mb-0 ms-2">
                                                             <!-- Title -->
                                                             <h6>
-                                                                {{ category.id }}
+                                                                {{ chapter.name }}
                                                             </h6>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <!-- Enrolled item -->
-                                                <td
-                                                    class="text-center text-sm-start"
-                                                >
-                                                    {{ category.name }}
-                                                </td>
-                                                <!-- Status item -->
-                                                <td>
-                                                    <div
-                                                        class="badge bg-success bg-opacity-10 text-success"
-                                                    >
-                                                        {{ category.created_at }}
                                                     </div>
                                                 </td>
 
@@ -284,7 +294,7 @@ Inner part START -->
                                                     <button
                                                         class="btn btn-sm btn-success-soft btn-round me-1 mb-0"
                                                         @click="
-                                                            editModal(category)
+                                                            editModal(chapter)
                                                         "
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#addQuiz"
@@ -296,8 +306,8 @@ Inner part START -->
                                                     <button
                                                         class="btn btn-sm btn-danger-soft btn-round mb-0"
                                                         @click="
-                                                            deleteCategory(
-                                                                category.id
+                                                            deleteChapter(
+                                                                chapter.id
                                                             )
                                                         "
                                                     >
@@ -394,14 +404,14 @@ Inner part END -->
                             id="addQuizLabel"
                             v-show="editMode == false"
                         >
-                            Ajoutez nouvelle category
+                            Ajoutez Chapitre
                         </h5>
                         <h5
                             class="modal-title text-white"
                             id="addQuizLabel"
                             v-show="editMode == true"
                         >
-                            Mettre ajout la category
+                            Mettre Chapitre
                         </h5>
 
                         <button
@@ -417,18 +427,59 @@ Inner part END -->
                         <form
                             class="row text-start g-3"
                             @submit.prevent="
-                                editMode ? updateCategory() : createNewCategory()
+                                editMode ? updateChapter() : createNewChapter()
                             "
                         >
                             <div class="col-12">
-                                <label class="form-label">Name category</label>
+                                <label class="form-label">Nom</label>
                                 <input
                                     class="form-control"
                                     type="text"
                                     v-model="form.name"
-                                    placeholder="Nom de la category"
+                                    placeholder="Nom de la classe"
                                 />
                             </div>
+                             <div class="col-6">
+                                <label class="form-label">url video</label>
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    v-model="form.url"
+                                    placeholder="url"
+                                />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">PDF</label>
+                                <input
+                                    class="form-control"
+                                    type="file"
+                                    @change="onFile"
+                                    placeholder="pdf"
+                                />
+                            </div>
+
+                              <div class="col-6">
+                                <label class="form-label">Nom SA</label>
+                                <select class="form-control"  v-model="form.learning_id">
+                                    <option v-for="learning in learnings" :key="learning.id" :value="learning.id">
+                                        {{learning.name}}
+                                    </option>
+
+
+                               </select>
+                            </div>
+
+
+                             <div class="col-12">
+                                <label class="form-label">Description</label>
+                                <textarea
+                                    class="form-control"
+                                    type="text"
+                                    v-model="form.description"
+                                    placeholder="Description"
+                                />
+                            </div>
+
                         </form>
                         <div class="modal-footer">
                             <button
@@ -442,17 +493,17 @@ Inner part END -->
                                 type="button"
                                 class="btn btn-success my-0"
                                 v-show="editMode == false"
-                                @click="createNewCategory()"
+                                @click="createNewChapter()"
                             >
-                                Ajoutez nouvelle category
+                                Ajoutez Chapitre
                             </button>
                             <button
                                 type="button"
                                 class="btn btn-success my-0"
                                 v-show="editMode == true"
-                                @click="updateCategory()"
+                                @click="updateChapter()"
                             >
-                                Mettre ajout la category
+                                Mettre ajout Chapitre
                             </button>
                         </div>
                     </div>

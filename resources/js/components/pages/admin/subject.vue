@@ -1,54 +1,61 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import sideBar from './sidebar.vue'
+import sideBar from "./sidebar.vue";
 
-
-const categories = ref([]);
+const subjects = ref([]);
+const levels = ref([]);
 const editMode = ref(false);
 const form = ref({
     name: "",
+    level_id: "",
 });
 
-const getCategories = async () => {
-    let response = await axios.get("/api/get_categories");
-    console.log("categories", response.data.categories);
-    categories.value = response.data.categories;
+const getLevels = async () => {
+    let response = await axios.get("/api/get_levels");
+    console.log("levels", response.data.levels);
+    levels.value = response.data.levels;
 };
 
-const createNewCategory = async () => {
-    await axios.post("/api/create_category", form.value).then((response) => {
-        getCategories();
+const getSubjects = async () => {
+    let response = await axios.get("/api/get_subjects");
+    console.log("subjects", response.data.subjects);
+    subjects.value = response.data.subjects;
+};
+
+const createNewSubject = async () => {
+    await axios.post("/api/create_subject", form.value).then((response) => {
+        getSubjects();
         form.value = {};
         editMode.value = false;
         toast.fire({
             icon: "success",
-            title: "Category add Successfully",
+            title: "subject add Successfully",
         });
         console.log(response);
     });
 };
 
-const editModal = (Category) => {
+const editModal = (subject) => {
     editMode.value = true;
-    form.value = Category;
+    form.value = subject;
 };
 
-const updateCategory = async () => {
+const updateSubject = async () => {
     await axios
-        .post("/api/update_category/" + form.value.id, form.value)
+        .post("/api/update_subject/" + form.value.id, form.value)
         .then(() => {
-            getCategories();
+            getSubjects();
             form.value = {};
             editMode.value = false;
             toast.fire({
                 icon: "success",
-                title: "Category update Successfully",
+                title: "subject update Successfully",
             });
         });
 };
 
-const deleteCategory = (id) => {
+const deleteSubject = (id) => {
     Swal.fire({
         title: "Are you sure ?",
         text: "You can't go back",
@@ -59,16 +66,17 @@ const deleteCategory = (id) => {
         confirmButtonText: "Yes, delete it !",
     }).then((result) => {
         if (result.value) {
-            axios.get("/api/delete_category/" + id).then(() => {
-                Swal.fire("Delete", "Category delete successfully", "success");
-                getCategories();
+            axios.get("/api/delete_subject/" + id).then(() => {
+                Swal.fire("Delete", "Subject delete successfully", "success");
+                getSubjects();
             });
         }
     });
 };
 
 onMounted(async () => {
-    getCategories();
+    getLevels();
+    getSubjects();
 });
 </script>
 
@@ -78,17 +86,12 @@ onMounted(async () => {
         <!-- =======================
 Main Banner START -->
         <section class="pt-0">
-            <!-- Main banner background image -->
-            <div class="container-fluid px-0">
-                <div
-                    class="bg-blue h-100px h-md-200px rounded-0"
-                    style="
-                        background: url(assets/images/pattern/04.png) no-repeat
-                            center center;
-                        background-size: cover;
-                    "
-                ></div>
-            </div>
+             <!-- Main banner background image -->
+	<div class="container-fluid px-0">
+		<div class="bg-blue h-100px h-md-200px rounded-0"
+        style="background:url(assets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+		</div>
+	</div>
             <div class="container mt-n4">
                 <div class="row">
                     <!-- Profile banner START -->
@@ -116,7 +119,6 @@ Main Banner START -->
                                                 class="bi bi-patch-check-fill text-info small"
                                             ></i>
                                         </h1>
-
                                     </div>
                                     <!-- Button -->
                                     <!-- Button -->
@@ -128,7 +130,7 @@ Main Banner START -->
                                             class="btn btn-sm btn-primary mb-0"
                                             data-bs-toggle="modal"
                                             data-bs-target="#addQuiz"
-                                            >Ajoutez une nouvelle Category</a
+                                            >Ajoutez Matiere</a
                                         >
                                     </div>
                                 </div>
@@ -177,7 +179,7 @@ Inner part START -->
                             <div
                                 class="card-header bg-transparent border-bottom"
                             >
-                                <h3 class="mb-0">Liste des categories</h3>
+                                <h3 class="mb-0">Liste des Matiers</h3>
                             </div>
                             <!-- Card header END -->
 
@@ -234,7 +236,7 @@ Inner part START -->
                                                     scope="col"
                                                     class="border-0"
                                                 >
-                                                    Date Creation
+                                                    ID niveau
                                                 </th>
                                                 <th
                                                     scope="col"
@@ -249,8 +251,8 @@ Inner part START -->
                                         <tbody>
                                             <!-- Table item -->
                                             <tr
-                                                v-for="category in categories"
-                                                :key="category.id"
+                                                v-for="subject in subjects"
+                                                :key="subject.id"
                                             >
                                                 <!-- Course item -->
                                                 <td>
@@ -260,7 +262,9 @@ Inner part START -->
                                                         <div class="mb-0 ms-2">
                                                             <!-- Title -->
                                                             <h6>
-                                                                {{ category.id }}
+                                                                {{
+                                                                    subject.id
+                                                                }}
                                                             </h6>
                                                         </div>
                                                     </div>
@@ -269,14 +273,16 @@ Inner part START -->
                                                 <td
                                                     class="text-center text-sm-start"
                                                 >
-                                                    {{ category.name }}
+                                                    {{ subject.name }}
                                                 </td>
                                                 <!-- Status item -->
                                                 <td>
                                                     <div
                                                         class="badge bg-success bg-opacity-10 text-success"
                                                     >
-                                                        {{ category.created_at }}
+                                                        {{
+                                                            subject.level_id
+                                                        }}
                                                     </div>
                                                 </td>
 
@@ -284,7 +290,7 @@ Inner part START -->
                                                     <button
                                                         class="btn btn-sm btn-success-soft btn-round me-1 mb-0"
                                                         @click="
-                                                            editModal(category)
+                                                            editModal(subject)
                                                         "
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#addQuiz"
@@ -296,8 +302,8 @@ Inner part START -->
                                                     <button
                                                         class="btn btn-sm btn-danger-soft btn-round mb-0"
                                                         @click="
-                                                            deleteCategory(
-                                                                category.id
+                                                            deleteSubject(
+                                                                subject.id
                                                             )
                                                         "
                                                     >
@@ -394,14 +400,14 @@ Inner part END -->
                             id="addQuizLabel"
                             v-show="editMode == false"
                         >
-                            Ajoutez nouvelle category
+                            Ajoutez Matiere
                         </h5>
                         <h5
                             class="modal-title text-white"
                             id="addQuizLabel"
                             v-show="editMode == true"
                         >
-                            Mettre ajout la category
+                            Mettre SA
                         </h5>
 
                         <button
@@ -417,17 +423,37 @@ Inner part END -->
                         <form
                             class="row text-start g-3"
                             @submit.prevent="
-                                editMode ? updateCategory() : createNewCategory()
+                                editMode
+                                    ? updateSubject()
+                                    : createNewSubject()
                             "
                         >
                             <div class="col-12">
-                                <label class="form-label">Name category</label>
+                                <label class="form-label">Name Maitere</label>
                                 <input
                                     class="form-control"
                                     type="text"
                                     v-model="form.name"
-                                    placeholder="Nom de la category"
+                                    placeholder="Nom de la classe"
                                 />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Name Niveau</label>
+
+                                <select
+                                    class="form-control"
+                                    name=""
+                                    id=""
+                                    v-model="form.level_id"
+                                >
+                                    <option
+                                        :value="level.id"
+                                        v-for="level in levels"
+                                        :key="level.id"
+                                    >
+                                        {{ level.name }}
+                                    </option>
+                                </select>
                             </div>
                         </form>
                         <div class="modal-footer">
@@ -442,17 +468,17 @@ Inner part END -->
                                 type="button"
                                 class="btn btn-success my-0"
                                 v-show="editMode == false"
-                                @click="createNewCategory()"
+                                @click="createNewSubject()"
                             >
-                                Ajoutez nouvelle category
+                                Ajoutez Matiere
                             </button>
                             <button
                                 type="button"
                                 class="btn btn-success my-0"
                                 v-show="editMode == true"
-                                @click="updateCategory()"
+                                @click="updateSubject()"
                             >
-                                Mettre ajout la category
+                                Mettre ajout Matiere
                             </button>
                         </div>
                     </div>

@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted } from "vue"
 import myBase from '../../mybase.vue'
+import  myFooter from './footer.vue'
+
 
 const booksLevel = ref([])
 const level_id = ref()
@@ -138,14 +140,7 @@ Page content START -->
 								</h5>
 							</div>
 
-							<!-- Card footer -->
-							<div class="card-footer pt-0 px-3">
-								<div class="d-flex justify-content-between align-items-center">
-									<span class="h6 fw-light mb-0"></span>
-									<!-- Price -->
-									<h5 class="text-success mb-0">$125</h5>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 					<!-- Card item END -->
@@ -243,6 +238,7 @@ Action box START -->
 </section>
 <!-- =======================
 Action box END -->
+<my-footer></my-footer>
 
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
