@@ -73,11 +73,7 @@ onMounted(  () => {
 
                 <!-- Main navbar START -->
                 <div class="navbar-collapse collapse" id="navbarCollapse">
-                    <!-- Nav Search START -->
 
-                    <!-- Nav Search END -->
-
-                    <!-- Nav Main menu START -->
                     <ul class="navbar-nav navbar-nav-scroll ms-auto">
                         <li class="nav-link">
                             <router-link :to="{ name: 'Index' }"

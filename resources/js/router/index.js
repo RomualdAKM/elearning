@@ -6,6 +6,8 @@ import pagesHomeLogin from '../components/pages/home/login.vue'
 import pagesHomeRegister from '../components/pages/home/register.vue'
 import pagesHomesBook from '../components/pages/home/book.vue'
 import pagesHomeBookDetail from '../components/pages/home/bookdetail.vue'
+import pagesHomeChat from '../components/pages/home/chat.vue'
+
 
 //admin
 import pagesAdmin from '../components/pages/admin/dashboard.vue'
@@ -77,6 +79,15 @@ const routes = [
         name: 'Book',
         path: '/library',
         component: pagesHomesBook,
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+    {
+        name: 'Chat',
+        path: '/chat',
+        component: pagesHomeChat,
         meta: {
             requiresAuth: true
         }
@@ -173,7 +184,7 @@ const routes = [
         }
 
     },
-    
+
 
     {
         path: '/:pathMatch(.*)*',

@@ -7,8 +7,10 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\LearningController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\QuizController;
 
 /*
@@ -103,5 +105,14 @@ Route::controller(CategoryController::class)->group(function(){
     Route::post('create_category', 'create_category');
     Route::post('update_category/{id}', 'update_category');
     Route::get('delete_category/{id}', 'delete_category');
+});
+
+Route::resource('chat',ChatController::class);
+
+Route::controller(MessageController::class)->group(function(){
+
+    Route::get('get_messages', 'get_messages');
+    Route::post('create_message', 'create_message');
+
 });
 
