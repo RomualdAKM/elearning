@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\quiz;
-use App\Models\Learning;
+use App\Models\learning;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -23,7 +23,7 @@ class chapter extends Model
 
     public function learning()
     {
-        return $this->belongsTo(Learning::class);
+        return $this->belongsTo(learning::class);
     }
 
     public function quizzes()

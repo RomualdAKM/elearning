@@ -35,6 +35,7 @@ Route::controller(AuthController::class)
     });
 
 Route::controller(SubjectController::class)->group(function () {
+    Route::get('get_subject', 'get_subject');
     Route::get('get_subjects/{id}', 'get_subjects');
     //admin
     Route::post('create_subject', 'create_subject');

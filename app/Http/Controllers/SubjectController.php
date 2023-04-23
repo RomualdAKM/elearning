@@ -7,7 +7,19 @@ use App\Models\subject;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
+
+
 {
+
+    public function get_subject(){
+        $subject = subject::all();
+
+        return response()->json([
+            'subject' => $subject
+        ], 200);
+
+    }
+
     public function get_subjects($id)
     {
 

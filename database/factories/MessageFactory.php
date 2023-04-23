@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\message>
  */
-class MessageFactory extends Factory
+class messageFactory extends Factory
 {
     /**
      * Define the model's default state.

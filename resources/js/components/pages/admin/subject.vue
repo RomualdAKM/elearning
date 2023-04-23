@@ -18,9 +18,9 @@ const getLevels = async () => {
 };
 
 const getSubjects = async () => {
-    let response = await axios.get("/api/get_subjects");
-    console.log("subjects", response.data.subjects);
-    subjects.value = response.data.subjects;
+    let response = await axios.get("/api/get_subject");
+    console.log("subject", response.data.subject);
+    subjects.value = response.data.subject;
 };
 
 const createNewSubject = async () => {

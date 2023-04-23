@@ -20,8 +20,7 @@
 				<link
 								href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap"
 								rel="stylesheet">
-          		 <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-                 
+
 				<!-- Plugins CSS -->
 				<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/font-awesome/css/all.min.css') }}">
 				<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}">
@@ -121,7 +120,8 @@
 				<div id="app"></div>
 
     @vite('resources/js/app.js')
-
+ {{-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    --}}
 </body>
 
 </html>

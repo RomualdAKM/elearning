@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Chapter;
+use App\Models\chapter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -21,6 +21,6 @@ class quiz extends Model
 
     public function chapter()
     {
-        return $this->belongsTo(Chapter::class);
+        return $this->belongsTo(chapter::class);
     }
 }

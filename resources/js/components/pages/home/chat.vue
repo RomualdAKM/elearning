@@ -58,94 +58,276 @@ onMounted(() => {
 
 
 })
+
+
 </script>
 <template>
-    <div class="container">
-     <div class="flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
-   <div class="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
-      <div class="relative flex items-center space-x-4">
-         <div class="relative">
-            <span class="absolute text-green-500 right-0 bottom-0">
-               <svg width="20" height="20">
-                  <circle cx="8" cy="8" r="8" fill="currentColor"></circle>
-               </svg>
-            </span>
-         </div>
-         <div class="flex flex-col leading-tight">
-            <div class="text-2xl mt-1 flex items-center">
-               <span class="text-gray-700 text-blue-600 mr-3">Forum de Discussion des Apprenants</span>
-            </div>
-            <span class="text-lg text-gray-600">Soyez Polis</span>
-         </div>
-      </div>
+	<div class="container-fluid mt-5">
 
-   </div>
-   <div id="messages" class="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
-  <div class="chat-message" v-for="msg in messages" :key="msg.id">
-    <div class="flex items-end">
-      <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-        <div>
-          <div class="px-4 py-2 rounded-lg inline-block  bg-emerald-200 text-lg text-red-500">{{msg.message}}
+				<div class="col-md-8 col-xl-12 chat">
+					<div class="card">
+						<div class="card-header msg_head">
+							<div class="d-flex bd-highlight">
 
-            <span class="text-blue-600 text-sm">envoyé par -> {{msg.user.name}} </span>
-            </div>
+								<div class="user_info">
+									<span>Furum de discussion des apprenants</span>
+									<p>Soyez polis</p>
+								</div>
 
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+							</div>
 
-   <div class="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
-      <form @submit.prevent="createMessage()">
-      <div class="relative flex">
+						</div>
+						<div class="card-body msg_card_body">
 
-         <input type="text" placeholder="Write your message!" v-model="form.message" class="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3">
-         <input type="text" hidden placeholder="Write your message!"  v-model="form.userId" class="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3">
+							<div class="d-flex justify-content-start mb-4" v-for="msg in messages" :key="msg.id">
 
+								<div class="msg_cotainer">
+									 {{msg.message}}
+                                <span class="msg_time">envoyé par -> {{msg.user.name}} </span>
 
-         <div class="absolute right-0 items-center inset-y-0 hidden sm:flex">
+								</div>
+							</div>
 
+						</div>
+						<div class="card-footer">
+                            <form @submit.prevent="createMessage()">
+							<div class="input-group">
 
-            <div type="button" class="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none">
-               <input type="submit" class="font-bold " value="Send">
-               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-6 w-6 ml-2 transform rotate-90">
-                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-               </svg>
-            </div>
-         </div>
-      </div>
-      </form>
-   </div>
-</div>
+								<input name="" class="form-control type_msg" v-model="form.message" placeholder="Type your message...">
+								<input name="" hidden  v-model="form.userId" class="form-control type_msg" placeholder="Type your message...">
+								<div class="input-group-append">
+									<span class="input-group-text send_btn"> <input type="submit" value="Send">
+                    </span>
+								</div>
+							</div>
+                            </form>
+						</div>
+					</div>
+				</div>
 
-    </div>
+		</div>
 </template>
 
 <style scoped>
+.chat{
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+		.card{
+			height: 500px;
+			border-radius: 15px !important;
+			background-color: rgba(0,0,0,0.4) !important;
+		}
+		.contacts_body{
+			padding:  0.75rem 0 !important;
+			overflow-y: auto;
+			white-space: nowrap;
+		}
+		.msg_card_body{
+			overflow-y: auto;
+		}
+		.card-header{
+			border-radius: 15px 15px 0 0 !important;
+			border-bottom: 0 !important;
+		}
+	 .card-footer{
+		border-radius: 0 0 15px 15px !important;
+			border-top: 0 !important;
+	}
+		.container{
+			align-content: center;
+		}
+		.search{
+			border-radius: 15px 0 0 15px !important;
+			background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color:white !important;
+		}
+		.search:focus{
+		     box-shadow:none !important;
+           outline:0px !important;
+		}
+		.type_msg{
+			background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color:white !important;
+			height: 60px !important;
+			overflow-y: auto;
+		}
+			.type_msg:focus{
+		     box-shadow:none !important;
+           outline:0px !important;
+		}
+		.attach_btn{
+	border-radius: 15px 0 0 15px !important;
+	background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color: white !important;
+			cursor: pointer;
+		}
+		.send_btn{
+	border-radius: 0 15px 15px 0 !important;
+	background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color: white !important;
+			cursor: pointer;
+		}
+		.search_btn{
+			border-radius: 0 15px 15px 0 !important;
+			background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color: white !important;
+			cursor: pointer;
+		}
+		.contacts{
+			list-style: none;
+			padding: 0;
+		}
+		.contacts li{
+			width: 100% !important;
+			padding: 5px 10px;
+			margin-bottom: 15px !important;
+		}
+	.active{
+			background-color: rgba(0,0,0,0.3);
+	}
+		.user_img{
+			height: 70px;
+			width: 70px;
+			border:1.5px solid #f5f6fa;
+
+		}
+		.user_img_msg{
+			height: 40px;
+			width: 40px;
+			border:1.5px solid #f5f6fa;
+
+		}
+	.img_cont{
+			position: relative;
+			height: 70px;
+			width: 70px;
+	}
+	.img_cont_msg{
+			height: 40px;
+			width: 40px;
+	}
+	.online_icon{
+		position: absolute;
+		height: 15px;
+		width:15px;
+		background-color: #4cd137;
+		border-radius: 50%;
+		bottom: 0.2em;
+		right: 0.4em;
+		border:1.5px solid white;
+	}
+	.offline{
+		background-color: #c23616 !important;
+	}
+	.user_info{
+		margin-top: auto;
+		margin-bottom: auto;
+		margin-left: 15px;
+	}
+	.user_info span{
+		font-size: 20px;
+		color: white;
+	}
+	.user_info p{
+	font-size: 10px;
+	color: rgba(255,255,255,0.6);
+	}
+	.video_cam{
+		margin-left: 50px;
+		margin-top: 5px;
+	}
+	.video_cam span{
+		color: white;
+		font-size: 20px;
+		cursor: pointer;
+		margin-right: 20px;
+	}
+	.msg_cotainer{
+		margin-top: auto;
+		margin-bottom: auto;
+		margin-left: 10px;
+		border-radius: 25px;
+		background-color: #f6f7f7;
+        color: black;
+		padding: 10px;
+        font-size: 16px;
+        font-weight: 900;
+		position: relative;
+	}
+	.msg_cotainer_send{
+		margin-top: auto;
+		margin-bottom: auto;
+		margin-right: 10px;
+		border-radius: 25px;
+		background-color: #78e08f;
+		padding: 10px;
+		position: relative;
+	}
+	.msg_time{
+
+		left: 0;
+		bottom: -15px;
+		color: rgba(195, 35, 35, 0.5);
+		font-size: 14px;
+	}
+	.msg_time_send{
+		position: absolute;
+		right:0;
+		bottom: -15px;
+		color: rgba(6, 6, 6, 0.515);
+		font-size: 10px;
+	}
+	.msg_head{
+		position: relative;
+	}
+	#action_menu_btn{
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		color: white;
+		cursor: pointer;
+		font-size: 20px;
+	}
+	.action_menu{
+		z-index: 1;
+		position: absolute;
+		padding: 15px 0;
+		background-color: rgba(0,0,0,0.5);
+		color: white;
+		border-radius: 15px;
+		top: 30px;
+		right: 15px;
+		display: none;
+	}
+	.action_menu ul{
+		list-style: none;
+		padding: 0;
+	margin: 0;
+	}
+	.action_menu ul li{
+		width: 100%;
+		padding: 10px 15px;
+		margin-bottom: 5px;
+	}
+	.action_menu ul li i{
+		padding-right: 10px;
+
+	}
+	.action_menu ul li:hover{
+		cursor: pointer;
+		background-color: rgba(0,0,0,0.2);
+	}
+	@media(max-width: 576px){
+	.contacts_card{
+		margin-bottom: 15px !important;
+	}
+	}
 
 
-.scrollbar-w-2::-webkit-scrollbar {
-  width: 0.25rem;
-  height: 0.25rem;
-}
-
-.scrollbar-track-blue-lighter::-webkit-scrollbar-track {
-  --bg-opacity: 1;
-  background-color: #f7fafc;
-  background-color: rgba(247, 250, 252, var(--bg-opacity));
-}
-
-.scrollbar-thumb-blue::-webkit-scrollbar-thumb {
-  --bg-opacity: 1;
-  background-color: #edf2f7;
-  background-color: rgba(237, 242, 247, var(--bg-opacity));
-}
-
-.scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
-  border-radius: 0.25rem;
-}
-.chat-message {
-  margin-bottom: 1rem;
-}
 </style>
