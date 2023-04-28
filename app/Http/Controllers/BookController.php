@@ -27,6 +27,33 @@ class BookController extends Controller
         ]);
     }
 
+    public function get_books_in_level($levelId)
+
+    {
+
+        $booksLevel = book::orderBy('id', 'DESC')
+        ->whereHas('level', function ($query) use ($levelId) {
+            $query->where('id', $levelId);
+        })->get();
+
+        return response()->json([
+            'booksLevel' => $booksLevel
+        ], 200);
+    }
+
+    public function search_book(Request $request)
+    {
+
+        $search = $request->get('s');
+
+            $book = book::where('name', 'LIKE', "%$search%")->with('level')->get();
+
+            return response()->json([
+                'book' => $book
+            ], 200);
+        }
+
+
     public function create_book(Request $request)
     {
 

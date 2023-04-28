@@ -29,6 +29,21 @@ class ChapterController extends Controller
 
     }
 
+    public function search_chapter(Request $request)
+    {
+
+        $search = $request->get('s');
+
+
+            $chapter = chapter::where('name', 'LIKE', "%$search%")->get();
+        
+        return response()->json([
+            'chapter' => $chapter
+        ], 200);
+    }
+
+
+
     public function create_chapter(Request $request)
     {
 
@@ -98,4 +113,8 @@ class ChapterController extends Controller
         $chapter = chapter::findOrFail($id);
         $chapter->delete();
     }
+
+
+
+
 }

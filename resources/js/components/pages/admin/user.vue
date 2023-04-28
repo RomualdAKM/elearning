@@ -1,78 +1,29 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import sideBar from './sidebar.vue'
+import sideBar from "./sidebar.vue";
 
-
-const quizzes = ref([])
-const chapters = ref([])
-const searchQuiz = ref()
-const editMode = ref(false)
+const users = ref([]);
+const searchUser = ref();
 const form = ref({
-
-    question: "",
-    option1: "",
-    option2: "",
-    option3: "",
-    response: "",
-    chapter_id: "",
-
+    name: "",
 });
 
-const getChapters = async () => {
-    let response = await axios.get('/api/get_chapters')
-    console.log('chapters', response.data.chapters)
-    chapters.value = response.data.chapters
-}
-
-const getQuizzes = async () => {
-    let response = await axios.get("/api/get_quizzes");
-    console.log("quizzes", response.data.quizzes);
-    quizzes.value = response.data.quizzes;
+const getUsers = async () => {
+    let response = await axios.get("/api/get_users");
+    console.log("users", response.data.users);
+    users.value = response.data.users;
 };
+
 const search = async () => {
-    let response = await axios.get(
-        "/api/search_quiz?s=" + searchQuiz.value
-    );
+    let response = await axios.get("/api/search_user?s=" + searchUser.value);
 
-    quizzes.value = response.data.quiz;
+    users.value = response.data.user;
 
-    console.log("search", response.data.quiz);
+    console.log("search", response.data.user);
 };
 
-const createNewQuiz = async () => {
-    await axios.post("/api/create_quiz", form.value).then((response) => {
-        getQuizzes();
-        form.value = {};
-        editMode.value = false;
-        toast.fire({
-            icon: "success",
-            title: "Quiz add Successfully",
-        });
-        console.log(response);
-    });
-};
-
-const editModal = (quiz) => {
-    editMode.value = true;
-    form.value = quiz;
-};
-
-const updateQuiz = async () => {
-    await axios
-        .post("/api/update_quiz/" + form.value.id, form.value)
-        .then(() => {
-            getQuizzes();
-            form.value = {};
-            editMode.value = false;
-            toast.fire({
-                icon: "success",
-                title: "Quiz update Successfully",
-            });
-        });
-};
-
-const deleteQuiz = (id) => {
+const deleteUser = (id) => {
     Swal.fire({
         title: "Are you sure ?",
         text: "You can't go back",
@@ -83,17 +34,16 @@ const deleteQuiz = (id) => {
         confirmButtonText: "Yes, delete it !",
     }).then((result) => {
         if (result.value) {
-            axios.get("/api/delete_quiz/" + id).then(() => {
-                Swal.fire("Delete", "Quiz delete successfully", "success");
-                getQuizzes();
+            axios.get("/api/delete_user/" + id).then(() => {
+                Swal.fire("Delete", "User delete successfully", "success");
+                getUsers();
             });
         }
     });
 };
 
 onMounted(async () => {
-    getQuizzes()
-    getChapters()
+    getUsers();
 });
 </script>
 
@@ -103,11 +53,17 @@ onMounted(async () => {
         <!-- =======================
 Main Banner START -->
         <section class="pt-0">
-           <!-- Main banner background image -->
-	<div class="container-fluid px-0">
-		<div class="bg-blue h-100px h-md-200px rounded-0" style="background:url(assets/images/pattern/04.png) no-repeat center center; background-size:cover;">
-		</div>
-	</div>
+            <!-- Main banner background image -->
+            <div class="container-fluid px-0">
+                <div
+                    class="bg-blue h-100px h-md-200px rounded-0"
+                    style="
+                        background: url(assets/images/pattern/04.png) no-repeat
+                            center center;
+                        background-size: cover;
+                    "
+                ></div>
+            </div>
             <div class="container mt-n4">
                 <div class="row">
                     <!-- Profile banner START -->
@@ -135,20 +91,6 @@ Main Banner START -->
                                                 class="bi bi-patch-check-fill text-info small"
                                             ></i>
                                         </h1>
-
-                                    </div>
-                                    <!-- Button -->
-                                    <!-- Button -->
-                                    <div
-                                        class="d-flex align-items-center mt-2 mt-md-0"
-                                    >
-                                        <a
-                                            href="#"
-                                            class="btn btn-sm btn-primary mb-0"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#addQuiz"
-                                            >Ajoutez un nouveau quiz</a
-                                        >
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +138,7 @@ Inner part START -->
                             <div
                                 class="card-header bg-transparent border-bottom"
                             >
-                                <h3 class="mb-0">Liste des quizzes</h3>
+                                <h3 class="mb-0">Liste des Apprenants</h3>
                             </div>
                             <!-- Card header END -->
 
@@ -210,7 +152,8 @@ Inner part START -->
                                     <div class="col-md-8">
                                         <form class="rounded position-relative">
                                             <input
-                                                v-model="searchQuiz" @keyup="search()"
+
+                                                 v-model="searchUser" @keyup="search()"
                                                 class="form-control pe-5 bg-transparent"
                                                 type="search"
                                                 placeholder="Search"
@@ -232,7 +175,7 @@ Inner part START -->
                                 <!-- Course list table START -->
                                 <div class="table-responsive border-0">
                                     <table
-                                        class="table table-dark-gray align-middle  p-4 mb-0 table-hover"
+                                        class="table table-dark-gray align-middle p-4 mb-0 table-hover"
                                     >
                                         <!-- Table head -->
                                         <thead>
@@ -241,38 +184,20 @@ Inner part START -->
                                                     scope="col"
                                                     class="border-0 rounded-start"
                                                 >
-                                                    Question
+                                                    Id
                                                 </th>
                                                 <th
                                                     scope="col"
                                                     class="border-0"
                                                 >
-                                                    option1
-                                                </th>
-                                                  <th
-                                                    scope="col"
-                                                    class="border-0"
-                                                >
-                                                    option2
-                                                </th>
-                                                  <th
-                                                    scope="col"
-                                                    class="border-0"
-                                                >
-                                                    option2
+                                                    Nom
                                                 </th>
 
                                                 <th
                                                     scope="col"
                                                     class="border-0"
                                                 >
-                                                   Reponse
-                                                </th>
-                                                  <th
-                                                    scope="col"
-                                                    class="border-0"
-                                                >
-                                                  Nom Chapitre
+                                                    Date Creation
                                                 </th>
                                                 <th
                                                     scope="col"
@@ -287,8 +212,8 @@ Inner part START -->
                                         <tbody>
                                             <!-- Table item -->
                                             <tr
-                                                v-for="quiz in quizzes"
-                                                :key="quiz.id"
+                                                v-for="user in users"
+                                                :key="user.id"
                                             >
                                                 <!-- Course item -->
                                                 <td>
@@ -298,7 +223,7 @@ Inner part START -->
                                                         <div class="mb-0 ms-2">
                                                             <!-- Title -->
                                                             <h6>
-                                                                {{ quiz.question }}
+                                                                {{ user.id }}
                                                             </h6>
                                                         </div>
                                                     </div>
@@ -307,53 +232,25 @@ Inner part START -->
                                                 <td
                                                     class="text-center text-sm-start"
                                                 >
-                                                    {{ quiz.option1 }}
+                                                    {{ user.name }}
                                                 </td>
-                                                 <td
-                                                    class="text-center text-sm-start"
-                                                >
-                                                    {{ quiz.option2 }}
-                                                </td>
-                                                 <td
-                                                    class="text-center text-sm-start"
-                                                >
-                                                    {{ quiz.option3 }}
-                                                 </td>
-
                                                 <!-- Status item -->
                                                 <td>
                                                     <div
                                                         class="badge bg-success bg-opacity-10 text-success"
                                                     >
-                                                        {{ quiz.response }}
+                                                        {{ user.created_at }}
                                                     </div>
                                                 </td>
 
-                                                   <td
-                                                    class="text-center text-sm-start"
-                                                >
-                                                    {{ quiz.chapter_id }}
-                                                 </td>
-
                                                 <td>
-                                                    <button
-                                                        class="btn btn-sm btn-success-soft btn-round me-1 mb-0"
-                                                        @click="
-                                                            editModal(quiz)
-                                                        "
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#addQuiz"
-                                                    >
-                                                        <i
-                                                            class="far fa-fw fa-edit"
-                                                        ></i>
-                                                    </button>
+                                                    <!-- <button  class="btn btn-sm btn-success-soft btn-round me-1 mb-0"
+                                                @click="editModal(level)"
+                                            data-bs-toggle="modal"  data-bs-target="#addQuiz"><i class="far fa-fw fa-edit"></i></button> -->
                                                     <button
                                                         class="btn btn-sm btn-danger-soft btn-round mb-0"
                                                         @click="
-                                                            deleteQuiz(
-                                                                quiz.id
-                                                            )
+                                                            deleteUser(user.id)
                                                         "
                                                     >
                                                         <i
@@ -432,135 +329,6 @@ Inner part START -->
         </section>
         <!-- =======================
 Inner part END -->
-
-        <!-- Add course modal START -->
-        <div
-            class="modal fade"
-            id="addQuiz"
-            tabindex="-1"
-            aria-labelledby="addQuizLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-dark">
-                        <h5
-                            class="modal-title text-white"
-                            id="addQuizLabel"
-                            v-show="editMode == false"
-                        >
-                            Ajoutez nouvelle classe
-                        </h5>
-                        <h5
-                            class="modal-title text-white"
-                            id="addQuizLabel"
-                            v-show="editMode == true"
-                        >
-                            Mettre ajout la classe
-                        </h5>
-
-                        <button
-                            type="button"
-                            class="btn btn-sm btn-light mb-0"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        >
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form
-                            class="row text-start g-3"
-                            @submit.prevent="
-                                editMode ? updateQuiz() : createNewQuiz()
-                            "
-                        >
-                            <div class="col-12">
-                                <label class="form-label">Question</label>
-                                <input
-                                    class="form-control"
-                                    type="text"
-                                    v-model="form.question"
-                                    placeholder="Nom de la classe"
-                                />
-                            </div>
-                             <div class="col-6">
-                                <label class="form-label">Option1</label>
-                                <input
-                                    class="form-control"
-                                    type="text"
-                                    v-model="form.option1"
-                                    placeholder="option1"
-                                />
-                            </div> <div class="col-6">
-                                <label class="form-label">option2</label>
-                                <input
-                                    class="form-control"
-                                    type="text"
-                                    v-model="form.option2"
-                                    placeholder="option2"
-                                />
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label">option3</label>
-                                <input
-                                    class="form-control"
-                                    type="text"
-                                    v-model="form.option3"
-                                    placeholder="option3"
-                                />
-                            </div>
-
-                             <div class="col-6">
-                                <label class="form-label">Reponse</label>
-                                <input
-                                    class="form-control"
-                                    type="text"
-                                    v-model="form.response"
-                                    placeholder="response"
-                                />
-                            </div>
-
-                              <div class="col-12">
-                                <label class="form-label">Nom Chapitre</label>
-                                <select class="form-control"  v-model="form.chapter_id">
-                                    <option v-for="chapter in chapters" :key="chapter.id" :value="chapter.id">
-                                        {{chapter.name}}
-                                    </option>
-
-                               </select>
-                            </div>
-                        </form>
-                        <div class="modal-footer">
-                            <button
-                                type="button"
-                                class="btn btn-danger-soft my-0"
-                                data-bs-dismiss="modal"
-                            >
-                                Close
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-success my-0"
-                                v-show="editMode == false"
-                                @click="createNewQuiz()"
-                            >
-                                Ajoutez nouvelle classe
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-success my-0"
-                                v-show="editMode == true"
-                                @click="updateQuiz()"
-                            >
-                                Mettre ajout la classe
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Add course modal START -->
     </main>
     <!-- **************** MAIN CONTENT END **************** -->
 </template>

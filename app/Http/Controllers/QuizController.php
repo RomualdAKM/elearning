@@ -18,6 +18,17 @@ class QuizController extends Controller
         ]);
     }
 
+    public function search_quiz(Request $request){
+        $search = $request->get('s');
+
+
+        $quiz = quiz::where('question', 'LIKE', "%$search%")->get();
+
+        return response()->json([
+            'quiz' => $quiz
+        ], 200);
+    }
+
 
     public function create_quiz(Request $request)
     {

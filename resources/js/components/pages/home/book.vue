@@ -10,7 +10,6 @@ const searchBook = ref()
 
 
 
-
 const getBooksInLevel = async () => {
     let response = await axios.get(`/api/get_books_in_level/${level_id.value}`)
     console.log('books', response.data.booksLevel)
@@ -81,9 +80,13 @@ Page Banner START -->
 
 							<!-- Search -->
 							<div class="bg-body rounded p-2">
-								<div class="input-group">
-									<input v-model="searchBook" @keyup="search()" class="form-control border-0 me-1" type="search" placeholder="Search book">
-								</div>
+								<form class="input-group">
+									<input v-model="searchBook" @keyup="search()"
+                                    class="form-control border-0 me-1"
+                                    type="search"
+                                    placeholder="Search book"
+                                    aria-label="Search">
+                                </form>
 							</div>
 						</div>
 
@@ -110,14 +113,14 @@ Page content START -->
 
 
 				<!-- Book Grid START -->
-				<div class="row g-4" v-for="item in booksLevel" :key="item.id">
+				<div class="row g-4">
 
 					<!-- Card item START -->
-					<div class="col-sm-6 col-lg-4 col-xl-3" v-for="book in item.books" :key="book.id">
+					<div class="col-sm-6 col-lg-4 col-xl-3" v-for="book in booksLevel" :key="book.id">
 						<div class="card shadow h-100">
 							<div class="position-relative">
 								<!-- Image -->
-								<img :src="book.image" class="card-img-top" alt="book image">
+								<img :src="`/img/${book.image}`" class="card-img-top">
 								<!-- Overlay -->
 								<div class="card-img-overlay d-flex z-index-0 p-3">
 									<!-- Card overlay Top -->
@@ -140,7 +143,7 @@ Page content START -->
 								</h5>
 							</div>
 
-							
+
 						</div>
 					</div>
 					<!-- Card item END -->

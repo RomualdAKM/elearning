@@ -32,6 +32,18 @@ class LearningController extends Controller
         ]);
     }
 
+    public function search_learning(Request $request){
+
+        $search = $request->get('s');
+
+
+        $learning = learning::where('name', 'LIKE', "%$search%")->get();
+
+        return response()->json([
+            'learning' => $learning
+        ], 200);
+
+    }
 
     public function create_learning(Request $request)
     {

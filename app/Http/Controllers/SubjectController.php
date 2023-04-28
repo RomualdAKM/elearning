@@ -20,6 +20,19 @@ class SubjectController extends Controller
 
     }
 
+    public function search_subject(Request $request){
+        $search = $request->get('s');
+
+
+        $subjt = subject::where('name', 'LIKE', "%$search%")->get();
+
+        return response()->json([
+            'subjt' => $subjt
+        ], 200);
+
+
+    }
+
     public function get_subjects($id)
     {
 

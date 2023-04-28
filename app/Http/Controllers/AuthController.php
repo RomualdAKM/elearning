@@ -29,7 +29,7 @@ class AuthController extends Controller
             ];
             return response()->json(
                 $response,
-                400
+                200
             );
         }
 
@@ -59,7 +59,7 @@ class AuthController extends Controller
 
             $user = $request->user();
 
-           
+
             $success['token'] = $user->createToken('MyApp')->plainTextToken;
             $success['name'] = $user->name;
 
@@ -73,7 +73,7 @@ class AuthController extends Controller
         } else {
             $response = [
                 'success' => false,
-                'message' => "Unauthorized"
+                'message' => "!!!!!! Ces coordonnees ne sont pas enregistrez : ressayez ou creer un compte"
             ];
             return response()->json($response);
         }

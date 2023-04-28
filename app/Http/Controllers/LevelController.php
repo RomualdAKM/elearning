@@ -21,36 +21,8 @@ class LevelController extends Controller
 
 
 
-    public function get_books_in_level($levelId)
 
-    {
-        $booksLevel = level::where('id', $levelId)->with('books')->get();
-
-        return response()->json([
-            'booksLevel' => $booksLevel
-        ],200);
-    }
-
-    public function search_book(Request $request)
-    {
-
-        $search = $request->get('s');
-
-        if ($search != null) {
-
-           // $book = level::where('name', 'LIKE', "%$search%")->with('books')->get();
-
-           $book = level::with('books')
-            ->whereHas('books', function ($query) use ($search) {
-                $query->where('name', 'LIKE', "%$search%");
-            })
-            ->get();
-
-            return response()->json([
-                'book' => $book
-            ], 200);
-        }
-    }
+   
 
         public function create_level(Request $request){
 

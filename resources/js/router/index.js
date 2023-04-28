@@ -18,6 +18,7 @@ import pagesAdminCategory from '../components/pages/admin/category.vue'
 import pagesAdminBook from '../components/pages/admin/book.vue'
 import pagesAdminChapter from '../components/pages/admin/chapter.vue'
 import pagesAdminSubject from '../components/pages/admin/subject.vue'
+import pagesAdminUser from '../components/pages/admin/user.vue'
 
 
 import notFound from '../components/notFound.vue'
@@ -179,6 +180,15 @@ const routes = [
         name: 'subject',
         path: '/admin/subject',
         component: pagesAdminSubject,
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+    {
+        name: 'user',
+        path: '/admin/user',
+        component: pagesAdminUser,
         meta: {
             requiresAuth: true
         }

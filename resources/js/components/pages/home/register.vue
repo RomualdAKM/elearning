@@ -13,7 +13,7 @@ let form = reactive({
     c_password: "",
 });
 
-let error = ref([]);
+let errors = ref([]);
 
 const getLevels = async () => {
     let response = await axios("/api/get_levels");
@@ -25,9 +25,16 @@ const register = async () => {
     await axios.post("/api/register", form).then((response) => {
         if (response.data.success) {
             localStorage.setItem("token", response.data.data.token);
-            router.push("/index");
+            router.push("/");
+             toast.fire({
+            icon: "success",
+            title: "Compte créé avec succé",
+        });
         } else {
-            error.value = response.data.message;
+           toast.fire({
+            icon: "error",
+            title: "!!!! Remplisez tout les champs et assurez vous que les passwords correspondent",
+        });
         }
     });
 };
@@ -40,6 +47,9 @@ onMounted(async () => {
 <template>
     <!-- **************** MAIN CONTENT START **************** -->
     <main>
+        <h2 class="alert alert-danger" v-for="error in errors" :key="error.id">
+                {{error}}
+        </h2>
         <section
             class="p-0 d-flex align-items-center position-relative overflow-hidden"
         >
@@ -109,24 +119,21 @@ onMounted(async () => {
 
                     <!-- Right -->
                     <div class="col-12 col-lg-6 m-auto">
-                        <div class="row my-5">
+                        <div class="row mt-1 my-5">
                             <div class="col-sm-10 col-xl-8 m-auto">
                                 <!-- Title -->
                                 <img
                                     src="assets/images/element/03.svg"
-                                    class="h-40px mb-2"
+                                    class="h-40px"
                                     alt=""
                                 />
-                                <h2>Sign up for your account!</h2>
-                                <p class="lead mb-4">
-                                    Nice to see you! Please Sign up with your
-                                    account.
-                                </p>
+                                <h4>Créez un compte!</h4>
+
 
                                 <!-- Form START -->
                                 <form @submit.prevent="register()">
                                     <!-- Name -->
-                                    <div class="mb-4">
+                                    <div class="m-1">
                                         <label
                                             for="exampleInputEmail1"
                                             class="form-label"
@@ -146,18 +153,16 @@ onMounted(async () => {
                                                 v-model="form.name"
                                                 id="exampleInputEmail1"
                                             />
+                                            <p>{{errors.name}}</p>
                                         </div>
                                     </div>
-
-                                    <!-- Sex -->
-                                    <div class="mb-4">
-                                        <div class="input-group input-group-lg">
-                                            <label
+                                    <div class="mb-2">
+                                        <label
                                                 for="exampleInputEmail1"
                                                 class="form-label"
                                                 >Niveau *</label
                                             >
-
+                                        <div class="input-group input-group-lg">
                                             <span
                                                 class="input-group-text bg-light rounded-start border-0 text-secondary px-3"
                                                 ><i
@@ -168,7 +173,7 @@ onMounted(async () => {
                                                 name=""
                                                 id=""
                                                 v-model="form.level_id"
-                                                class="border-0 bg-light rounded-end ps-1"
+                                                class="form-control border-0 bg-light rounded-end ps-1"
                                                 placeholder="Choisir ta classe"
                                             >
                                                 <option
@@ -179,14 +184,17 @@ onMounted(async () => {
                                                     {{ item.name }}
                                                 </option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
 
                                             <label
                                                 for="exampleInputEmail1"
                                                 class="form-label mx-3"
                                                 >Sex *</label
                                             >
-
-                                            <span
+                                        <div class="input-group input-group-lg">
+                                             <span
                                                 class="input-group-text bg-light rounded-start border-0 text-secondary px-3"
                                                 ><i
                                                     class="bi bi-envelope-fill"
@@ -196,7 +204,7 @@ onMounted(async () => {
                                                 name=""
                                                 id=""
                                                 v-model="form.sex"
-                                                class="border-0 bg-light rounded-end ps-1"
+                                                class="form-control border-0 bg-light rounded-end ps-1"
                                                 placeholder="Sex"
                                             >
                                                 <option value="masculin">
@@ -209,8 +217,10 @@ onMounted(async () => {
                                         </div>
                                     </div>
 
+
+
                                     <!-- Email -->
-                                    <div class="mb-4">
+                                    <div class="mb-2">
                                         <label
                                             for="exampleInputEmail1"
                                             class="form-label"
@@ -233,7 +243,7 @@ onMounted(async () => {
                                         </div>
                                     </div>
                                     <!-- Password -->
-                                    <div class="mb-4">
+                                    <div class="mb-2">
                                         <label
                                             for="inputPassword5"
                                             class="form-label"
@@ -241,7 +251,7 @@ onMounted(async () => {
                                         >
                                         <div class="input-group input-group-lg">
                                             <span
-                                                class="input-group-text bg-light rounded-start border-0 text-secondary px-3"
+                                                class="input-group-text bg-light rounded-start border-0 text-secondary px-1 "
                                                 ><i class="fas fa-lock"></i
                                             ></span>
                                             <input
@@ -254,7 +264,7 @@ onMounted(async () => {
                                         </div>
                                     </div>
                                     <!-- Confirm Password -->
-                                    <div class="mb-4">
+                                    <div class="mb-2">
                                         <label
                                             for="inputPassword6"
                                             class="form-label"

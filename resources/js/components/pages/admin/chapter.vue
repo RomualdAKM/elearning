@@ -7,6 +7,7 @@ import sideBar from './sidebar.vue'
 
 const learnings = ref([])
 const chapters = ref([])
+const searchChapter = ref()
 const editMode = ref(false)
 const form = ref({
     name: "",
@@ -29,6 +30,15 @@ const getLearnings = async () => {
     learnings.value = response.data.learnings
 }
 
+const search = async () => {
+
+    let response = await axios.get('/api/search_chapter?s=' + searchChapter.value)
+
+    chapters.value = response.data.chapter
+
+    console.log('search', response.data.chapter)
+
+}
 
 const getChapters = async () => {
     let response = await axios.get("/api/get_chapters");
@@ -227,19 +237,13 @@ Inner part START -->
                                     <div class="col-md-8">
                                         <form class="rounded position-relative">
                                             <input
+                                                v-model="searchChapter" @keyup="search()"
                                                 class="form-control pe-5 bg-transparent"
                                                 type="search"
                                                 placeholder="Search"
                                                 aria-label="Search"
                                             />
-                                            <button
-                                                class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
-                                                type="submit"
-                                            >
-                                                <i
-                                                    class="fas fa-search fs-6"
-                                                ></i>
-                                            </button>
+
                                         </form>
                                     </div>
                                 </div>

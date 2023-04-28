@@ -64,6 +64,12 @@
                             ><i class="bi bi-star fa-fw me-2"></i
                             >Category</router-link
                         >
+                        <router-link
+                            class="list-group-item"
+                            to="/admin/user"
+                            ><i class="bi bi-star fa-fw me-2"></i
+                            >Users</router-link
+                        >
                         <a
                             class="list-group-item text-danger bg-danger-soft-hover"
                             href="sign-in.html"

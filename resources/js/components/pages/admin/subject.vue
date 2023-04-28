@@ -5,6 +5,7 @@ import sideBar from "./sidebar.vue";
 
 const subjects = ref([]);
 const levels = ref([]);
+const searchSubject = ref();
 const editMode = ref(false);
 const form = ref({
     name: "",
@@ -21,6 +22,16 @@ const getSubjects = async () => {
     let response = await axios.get("/api/get_subject");
     console.log("subject", response.data.subject);
     subjects.value = response.data.subject;
+};
+
+const search = async () => {
+    let response = await axios.get(
+        "/api/search_subject?s=" + searchSubject.value
+    );
+
+    subjects.value = response.data.subjt;
+
+    console.log("search", response.data.subjt);
 };
 
 const createNewSubject = async () => {
@@ -193,6 +204,7 @@ Inner part START -->
                                     <div class="col-md-8">
                                         <form class="rounded position-relative">
                                             <input
+                                                v-model="searchSubject" @keyup="search()"
                                                 class="form-control pe-5 bg-transparent"
                                                 type="search"
                                                 placeholder="Search"
