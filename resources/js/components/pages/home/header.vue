@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted,computed, ref } from "vue";
 import router from "./../../../router/index.js";
 
 let subjects = ref([]);
@@ -11,7 +11,16 @@ const getSubjects = async () => {
     console.log("subjects", response.data.subjects);
     subjects.value = response.data.subjects;
 };
+// const isLoggedIn = computed(() => {
+//   return localStorage.getItem("token") !== null;
+// })
 
+const isLoggedIn = () => {
+    return localStorage.getItem("token") !== null;
+}
+const isNotLoggedIn = () => {
+    return localStorage.getItem("token") == null;
+}
 const logout = () => {
     localStorage.removeItem("token");
     router.push("/login");
@@ -29,9 +38,8 @@ onMounted(  () => {
             console.log('infoo', response.data.level_id);
             getSubjects()
         })
-
-
 })
+
 </script>
 
 <template>
@@ -41,7 +49,8 @@ onMounted(  () => {
             <div class="container">
                 <!-- Logo START -->
                 <a class="navbar-brand" href="index-2.html">
-                    <img
+                    <h3><span style="color: #fd7e14">E</span>duqMe</h3>
+                    <!-- <img
                         class="light-mode-item navbar-brand-item"
                         src="assets/images/logo.svg"
                         alt="logo"
@@ -50,7 +59,7 @@ onMounted(  () => {
                         class="dark-mode-item navbar-brand-item"
                         src="assets/images/logo-light.svg"
                         alt="logo"
-                    />
+                    /> -->
                 </a>
                 <!-- Logo END -->
 
@@ -73,7 +82,11 @@ onMounted(  () => {
 
                 <!-- Main navbar START -->
                 <div class="navbar-collapse collapse" id="navbarCollapse">
+                    <!-- Nav Search START -->
 
+                    <!-- Nav Search END -->
+
+                    <!-- Nav Main menu START -->
                     <ul class="navbar-nav navbar-nav-scroll ms-auto">
                         <li class="nav-link">
                             <router-link :to="{ name: 'Index' }"
@@ -129,6 +142,12 @@ onMounted(  () => {
                                 </li>
                             </ul>
                         </li>
+
+                         <li class="nav-link btn btn-white p-1" v-if="isNotLoggedIn()">
+                            <router-link :to="{ name: 'Login' }"
+                                >Login</router-link
+                            >
+                        </li>
                     </ul>
                     <!-- Nav Main menu END -->
                 </div>
@@ -136,7 +155,7 @@ onMounted(  () => {
 
                 <!-- Profile and notification START -->
                 <ul
-                    class="nav flex-row align-items-center list-unstyled ms-xl-auto"
+                    class="nav flex-row align-items-center list-unstyled ms-xl-auto" v-if="isLoggedIn()"
                 >
                     <!-- Wishlist START -->
                     <li class="nav-item ms-0 ms-sm-2 d-none d-sm-block">
@@ -145,93 +164,6 @@ onMounted(  () => {
                         ></a>
                     </li>
                     <!-- Wishlist END -->
-
-                    <!-- Notification dropdown START -->
-                    <li class="nav-item ms-2 ms-sm-3 dropdown">
-                        <!-- Notification button -->
-                        <a
-                            class="btn btn-light btn-round mb-0"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                            data-bs-auto-close="outside"
-                        >
-                            <i class="bi bi-bell fa-fw"></i>
-                        </a>
-                        <!-- Notification dote -->
-                        <span class="notif-badge animation-blink"></span>
-
-                        <!-- Notification dropdown menu START -->
-                        <div
-                            class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg border-0"
-                        >
-                            <div class="card bg-transparent">
-                                <div
-                                    class="card-header bg-transparent border-bottom py-4 d-flex justify-content-between align-items-center"
-                                >
-                                    <h6 class="m-0">
-                                        Notifications
-                                        <span
-                                            class="badge bg-danger bg-opacity-10 text-danger ms-2"
-                                            >2 new</span
-                                        >
-                                    </h6>
-                                    <a class="small" href="#">Clear all</a>
-                                </div>
-                                <div class="card-body p-0">
-                                    <ul
-                                        class="list-group list-unstyled list-group-flush"
-                                    >
-                                        <!-- Notif item -->
-                                        <li>
-                                            <a
-                                                href="#"
-                                                class="list-group-item-action border-0 border-bottom d-flex p-3"
-                                            >
-                                                <div class="me-3">
-                                                    <div
-                                                        class="avatar avatar-md"
-                                                    >
-                                                        <img
-                                                            class="avatar-img rounded-circle"
-                                                            src="assets/images/avatar/03.jpg"
-                                                            alt="avatar"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h6 class="mb-1">
-                                                        Update v2.3 completed
-                                                        successfully
-                                                    </h6>
-                                                    <p
-                                                        class="small text-body m-0"
-                                                    >
-                                                        What's new! Find out
-                                                        about new features
-                                                    </p>
-                                                    <small class="text-body"
-                                                        >5 min ago</small
-                                                    >
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- Button -->
-                                <div
-                                    class="card-footer bg-transparent border-0 py-3 text-center position-relative"
-                                >
-                                    <a href="#" class="stretched-link"
-                                        >See all incoming activity</a
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Notification dropdown menu END -->
-                    </li>
-                    <!-- Notification dropdown END -->
 
                     <!-- Profile dropdown START -->
                     <li class="nav-item ms-3 dropdown">
@@ -285,19 +217,8 @@ onMounted(  () => {
                                     Profile</a
                                 >
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="#"
-                                    ><i class="bi bi-gear fa-fw me-2"></i
-                                    >Account Settings</a
-                                >
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#"
-                                    ><i class="bi bi-info-circle fa-fw me-2"></i
-                                    >Help</a
-                                >
-                            </li>
-                            <li>
+
+                            <li >
                                 <button
                                     class="dropdown-item bg-danger-soft-hover"
                                     @click="logout()"
@@ -306,6 +227,7 @@ onMounted(  () => {
                                     Out
                                 </button>
                             </li>
+                          
                             <li><hr class="dropdown-divider" /></li>
                             <!-- Dark mode options START -->
                             <li>

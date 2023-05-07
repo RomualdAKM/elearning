@@ -33,7 +33,7 @@ const register = async () => {
         } else {
            toast.fire({
             icon: "error",
-            title: "!!!! Remplisez tout les champs et assurez vous que les passwords correspondent",
+            title: "!!!! Remplissez tout les champs et assurez vous que les passwords correspondent",
         });
         }
     });
@@ -61,59 +61,20 @@ onMounted(async () => {
                     >
                         <div class="p-3 p-lg-5">
                             <!-- Title -->
-                            <div class="text-center">
+                             <div class="text-center">
                                 <h2 class="fw-bold">
-                                    Welcome to our largest community
+                                    Bienvenue dans notre plus grande communauté
                                 </h2>
                                 <p class="mb-0 h6 fw-light">
-                                    Let's learn something new today!
+                                    Apprenons quelque chose de nouveau aujourd'hui!
                                 </p>
-                            </div>
-                            <!-- SVG Image -->
+                             </div>
+                            <!-- SVG Image elearg.jpeg el.webp-->
                             <img
                                 src="assets/images/element/02.svg"
                                 class="mt-5"
                                 alt=""
                             />
-                            <!-- Info -->
-                            <div
-                                class="d-sm-flex mt-5 align-items-center justify-content-center"
-                            >
-                                <ul class="avatar-group mb-2 mb-sm-0">
-                                    <li class="avatar avatar-sm">
-                                        <img
-                                            class="avatar-img rounded-circle"
-                                            src="assets/images/avatar/01.jpg"
-                                            alt="avatar"
-                                        />
-                                    </li>
-                                    <li class="avatar avatar-sm">
-                                        <img
-                                            class="avatar-img rounded-circle"
-                                            src="assets/images/avatar/02.jpg"
-                                            alt="avatar"
-                                        />
-                                    </li>
-                                    <li class="avatar avatar-sm">
-                                        <img
-                                            class="avatar-img rounded-circle"
-                                            src="assets/images/avatar/03.jpg"
-                                            alt="avatar"
-                                        />
-                                    </li>
-                                    <li class="avatar avatar-sm">
-                                        <img
-                                            class="avatar-img rounded-circle"
-                                            src="assets/images/avatar/04.jpg"
-                                            alt="avatar"
-                                        />
-                                    </li>
-                                </ul>
-                                <!-- Content -->
-                                <p class="mb-0 h6 fw-light ms-0 ms-sm-3">
-                                    4k+ Students joined us, now it's your turn.
-                                </p>
-                            </div>
                         </div>
                     </div>
 
@@ -127,7 +88,7 @@ onMounted(async () => {
                                     class="h-40px"
                                     alt=""
                                 />
-                                <h4>Créez un compte!</h4>
+                                <h4>Inscrivez-vous à EduqMe!</h4>
 
 
                                 <!-- Form START -->
@@ -142,10 +103,7 @@ onMounted(async () => {
                                         <div class="input-group input-group-lg">
                                             <span
                                                 class="input-group-text bg-light rounded-start border-0 text-secondary px-3"
-                                                ><i
-                                                    class="bi bi-envelope-fill"
-                                                ></i
-                                            ></span>
+                                                ><i class="fas fa-user"></i></span>
                                             <input
                                                 type="text"
                                                 class="form-control border-0 bg-light rounded-end ps-1"
@@ -165,10 +123,7 @@ onMounted(async () => {
                                         <div class="input-group input-group-lg">
                                             <span
                                                 class="input-group-text bg-light rounded-start border-0 text-secondary px-3"
-                                                ><i
-                                                    class="bi bi-envelope-fill"
-                                                ></i
-                                            ></span>
+                                                ><i class="fas fa-graduation-cap"></i></span>
                                             <select
                                                 name=""
                                                 id=""
@@ -196,10 +151,7 @@ onMounted(async () => {
                                         <div class="input-group input-group-lg">
                                              <span
                                                 class="input-group-text bg-light rounded-start border-0 text-secondary px-3"
-                                                ><i
-                                                    class="bi bi-envelope-fill"
-                                                ></i
-                                            ></span>
+                                                ></span>
                                             <select
                                                 name=""
                                                 id=""
@@ -283,7 +235,7 @@ onMounted(async () => {
                                                 id="inputPassword6"
                                             />
                                         </div>
-                                    </div>
+                                    </div><br>
 
 
                                     <!-- Button -->
@@ -299,6 +251,15 @@ onMounted(async () => {
                                     </div>
                                 </form>
                                 <!-- Form END -->
+                                 <!-- Sign up link -->
+                                <div class="mt-4 text-center">
+                                    <span
+                                        >Vous êtes déjà membre?
+                                        <router-link to="/login"
+                                            >Connectez-vous ici</router-link
+                                        ></span
+                                    >
+                                </div>
                             </div>
                         </div>
                     </div>

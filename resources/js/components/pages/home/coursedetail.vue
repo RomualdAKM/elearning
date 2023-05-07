@@ -52,9 +52,9 @@ onMounted(() => {
                 <div class="container">
                     <div class="row g-lg-5">
                         <!-- Course video START -->
-                        <div class="col-12 mt-3">
+                        <div class="col-12 mt-6">
                             <div class="video-player rounded-3">
-                                <video
+                                <!-- <video
                                     controls
                                     crossorigin="anonymous"
                                     playsinline
@@ -65,7 +65,7 @@ onMounted(() => {
                                         type="video/mp4"
                                         size="360"
                                     />
-                                    <!-- Caption files -->
+                                     Caption files
                                     <track
                                         kind="captions"
                                         label="English"
@@ -79,7 +79,17 @@ onMounted(() => {
                                         srclang="fr"
                                         src="assets/images/videos/fr.vtt"
                                     />
-                                </video>
+                                </video> -->
+
+
+
+                                 <iframe width="1100" height="515" src="https://www.youtube.com/embed/l_EmStoz20Y"
+                                    title="Venez découvrir l'IAM d'OVHcloud" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+
+
+
                             </div>
                         </div>
                         <!-- Course video END -->

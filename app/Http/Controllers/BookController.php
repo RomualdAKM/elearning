@@ -69,7 +69,7 @@ class BookController extends Controller
             $photo = $request->file('image');
             $file_image = time() . '.' . $photo->getClientOriginalName();
             $photo->move(public_path('img'), $file_image);
-            $image = 'img' . $file_image;
+            $image = 'img/' . $file_image;
         }
 
         $pdf = '';
@@ -77,7 +77,7 @@ class BookController extends Controller
             $p = $request->file('file');
             $file = time() . '.' . $p->getClientOriginalName();
             $p->move(public_path('pdf'), $file);
-            $pdf = 'pdf' . $file;
+            $pdf = 'pdf/' . $file;
         }
 
 
@@ -110,7 +110,7 @@ class BookController extends Controller
             $photo = $request->file('image');
             $file_image = time() . '.' . $photo->getClientOriginalName();
             $photo->move(public_path('img'), $file_image);
-            $image = 'img' . $file_image;
+            $image = 'img/' . $file_image;
         }
 
         $pdf = '';

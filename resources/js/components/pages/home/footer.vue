@@ -82,8 +82,8 @@ Footer START -->
 		<div class="row">
 			<div class="col-lg-6 mx-auto text-center mb-5">
 				<!-- Logo -->
-				<a href="index-2.html"> <img class="h-40px" src="assets/images/logo-light.svg" alt="logo"> </a>
-				<p class="mt-3 text-white">Eduport education theme, built specifically for the education centers which is dedicated to teaching and involving learners.</p>
+				<a href="index-2.html"> <h1><span style="color: #fd7e14">A</span><span style="color: #fff">ppAide</span></h1> </a>
+				<p class="mt-3 text-white">AppAide est un thème éducatif conçu spécifiquement pour les centres d'éducation dédiés à l'enseignement et à l'implication des apprenants.</p>
 
 				<!-- Links -->
         <ul class="nav justify-content-center justify-content-center text-primary-hover mt-3 mt-md-0">

@@ -22,9 +22,13 @@ const file = ref(null)
 const onFile = (e) => {
     file.value = e.target.files[0]
 }
+//get name
+
 const onImage = (e) => {
     image.value = e.target.files[0]
 }
+
+
 const getLevels = async () => {
     let response = await axios.get('/api/get_levels')
     console.log('levels', response.data.levels)
@@ -104,9 +108,6 @@ const updateBook = async () => {
         });
 };
 
- const getImageUrl = (nomImage) => {
-      return "/img/" + nomImage; // Chemin relatif de l'image dans le dossier public
-}
 
 const deleteBook = (id) => {
     Swal.fire({
@@ -332,7 +333,7 @@ Inner part START -->
                                                         <div class="mb-0 ms-2">
                                                             <!-- Title -->
                                                             <h6>
-                                                               <img :src="getImageUrl(book.image)" alt="photo">
+                                                               <img :src="book.image">
                                                             </h6>
                                                         </div>
                                                     </div>

@@ -1,3 +1,16 @@
+<script setup>
+import { useRoute } from 'vue-router';
+import router from "./../../../router/index.js";
+
+    const $route = useRoute();
+
+    const logout = () => {
+    localStorage.removeItem("token");
+    router.push("/login");
+};
+
+</script>
+
 <template>
     <div class="col-xl-3">
         <!-- Responsive offcanvas body START -->
@@ -26,55 +39,55 @@
                     <div
                         class="list-group list-group-dark list-group-borderless"
                     >
-                        <router-link class="list-group-item" to="/admin"
+                        <router-link :class="{ 'list-group-item': true, 'active': $route.path === '/admin' }" to="/admin"
                             ><i class="bi bi-ui-checks-grid fa-fw me-2"></i>
                             Dashboard
                         </router-link>
-                        <router-link class="list-group-item" to="/admin/chapter"
+                        <router-link :class="{ 'list-group-item': true, 'active': $route.path === '/admin/chapter' }" to="/admin/chapter"
                             ><i class="bi bi-basket fa-fw me-2"></i
                             >chapter</router-link
                         >
                         <router-link
-                            class="list-group-item active"
+                            :class="{ 'list-group-item': true, 'active': $route.path === '/admin/quiz' }"
                             to="/admin/quiz"
                             ><i class="bi bi-question-diamond fa-fw me-2"></i
                             >Quiz</router-link
                         >
                         <router-link
-                            class="list-group-item"
+                            :class="{ 'list-group-item': true, 'active': $route.path === '/admin/learning' }"
                             to="/admin/learning"
                             ><i class="bi bi-graph-up fa-fw me-2"></i
                             >Learnings</router-link
                         >
-                        <router-link class="list-group-item" to="/admin/level"
+                        <router-link :class="{ 'list-group-item': true, 'active': $route.path === '/admin/level' }" to="/admin/level"
                             ><i class="bi bi-people fa-fw me-2"></i
                             >Level</router-link
                         >
-                        <router-link class="list-group-item" to="/admin/subject"
+                        <router-link :class="{ 'list-group-item': true, 'active': $route.path === '/admin/subject' }" to="/admin/subject"
                             ><i class="bi bi-people fa-fw me-2"></i
                             >Subject</router-link
                         >
-                        <router-link class="list-group-item" to="/admin/book"
+                        <router-link :class="{ 'list-group-item': true, 'active': $route.path === '/admin/book' }" to="/admin/book"
                             ><i class="bi bi-folder-check fa-fw me-2"></i
                             >Book</router-link
                         >
                         <router-link
-                            class="list-group-item"
+                            :class="{ 'list-group-item': true, 'active': $route.path === '/admin/category' }"
                             to="/admin/category"
                             ><i class="bi bi-star fa-fw me-2"></i
                             >Category</router-link
                         >
                         <router-link
-                            class="list-group-item"
+                            :class="{ 'list-group-item': true, 'active': $route.path === '/admin/user' }"
                             to="/admin/user"
                             ><i class="bi bi-star fa-fw me-2"></i
                             >Users</router-link
                         >
-                        <a
+                        <button
                             class="list-group-item text-danger bg-danger-soft-hover"
-                            href="sign-in.html"
+                            @click="logout()"
                             ><i class="fas fa-sign-out-alt fa-fw me-2"></i>Sign
-                            Out</a
+                            Out</button
                         >
                     </div>
                 </div>

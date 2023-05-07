@@ -44,10 +44,10 @@ const login = async () => {
                             <!-- Title -->
                             <div class="text-center">
                                 <h2 class="fw-bold">
-                                    Welcome to our largest community
+                                    Bienvenue dans notre plus grande communauté
                                 </h2>
                                 <p class="mb-0 h6 fw-light">
-                                    Let's learn something new today!
+                                    Apprenons quelque chose de nouveau aujourd'hui!
                                 </p>
                             </div>
                             <!-- SVG Image -->
@@ -56,46 +56,6 @@ const login = async () => {
                                 class="mt-5"
                                 alt=""
                             />
-                            <!-- Info -->
-                            <div
-                                class="d-sm-flex mt-5 align-items-center justify-content-center"
-                            >
-                                <!-- Avatar group -->
-                                <ul class="avatar-group mb-2 mb-sm-0">
-                                    <li class="avatar avatar-sm">
-                                        <img
-                                            class="avatar-img rounded-circle"
-                                            src="assets/images/avatar/01.jpg"
-                                            alt="avatar"
-                                        />
-                                    </li>
-                                    <li class="avatar avatar-sm">
-                                        <img
-                                            class="avatar-img rounded-circle"
-                                            src="assets/images/avatar/02.jpg"
-                                            alt="avatar"
-                                        />
-                                    </li>
-                                    <li class="avatar avatar-sm">
-                                        <img
-                                            class="avatar-img rounded-circle"
-                                            src="assets/images/avatar/03.jpg"
-                                            alt="avatar"
-                                        />
-                                    </li>
-                                    <li class="avatar avatar-sm">
-                                        <img
-                                            class="avatar-img rounded-circle"
-                                            src="assets/images/avatar/04.jpg"
-                                            alt="avatar"
-                                        />
-                                    </li>
-                                </ul>
-                                <!-- Content -->
-                                <p class="mb-0 h6 fw-light ms-0 ms-sm-3">
-                                    4k+ Students joined us, now it's your turn.
-                                </p>
-                            </div>
                         </div>
                     </div>
 
@@ -105,10 +65,9 @@ const login = async () => {
                             <div class="col-sm-10 col-xl-8 m-auto">
                                 <!-- Title -->
                                 <span class="mb-0 fs-1">👋</span>
-                                <h1 class="fs-2">Login into Eduport!</h1>
+                                <h1 class="fs-2">Connectez-vous à EduqMe!</h1>
                                 <p class="lead mb-4">
-                                    Nice to see you! Please log in with your
-                                    account.
+                                    Ravi de vous voir ! Veuillez vous connecter avec votre compte.
                                 </p>
 
                                 <!-- Form START -->
@@ -160,8 +119,7 @@ const login = async () => {
                                             id="passwordHelpBlock"
                                             class="form-text"
                                         >
-                                            Your password must be 8 characters
-                                            at least
+                                            Votre mot de passe doit comporter au moins 8 caractères.
                                         </div>
                                     </div>
 
@@ -182,9 +140,9 @@ const login = async () => {
                                 <!-- Sign up link -->
                                 <div class="mt-4 text-center">
                                     <span
-                                        >Don't have an account?
+                                        >Vous n'avez pas de compte?
                                         <router-link to="/register"
-                                            >Signup here</router-link
+                                            >Inscrivez-vous ici</router-link
                                         ></span
                                     >
                                 </div>

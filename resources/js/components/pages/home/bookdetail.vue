@@ -32,7 +32,7 @@ onMounted(async () => {
       <!-- **************** MAIN CONTENT START **************** -->
     <main>
 
-        <!-- =======================
+     <!-- =======================
 Page Banner START -->
 <section class="py-0">
 	<div class="container">
@@ -53,9 +53,9 @@ Page Banner START -->
 						<!-- Content -->
 						<div class="col-md-6 px-md-5">
 							<!-- Title -->
-							<h1 class="mb-3">Welcome to our online book store!</h1>
-							<p class="mb-3">Expand knowledge by reading book Two before narrow not relied on how except moment myself Dejection assurance. </p>
+							<h1 class="mb-3">Bienvenue dans notre librairie en ligne !</h1>
 
+						
 						</div>
 
 						<!-- Image -->
@@ -88,11 +88,9 @@ Page content START -->
                                     <div class="card shadow">
                                         <!-- Image -->
                                         <div class="rounded-3">
-                                            <img
-                                                :src="book.image"
-                                                class="card-img-top"
-                                                alt="book image"
-                                            />
+
+                                            <img :src=" book.image" class="card-img-top">
+
                                         </div>
 
                                         <!-- Card body -->

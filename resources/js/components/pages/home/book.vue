@@ -75,8 +75,8 @@ Page Banner START -->
 						<!-- Content -->
 						<div class="col-md-6 px-md-5">
 							<!-- Title -->
-							<h1 class="mb-3">Welcome to our online book store!</h1>
-							<p class="mb-3">Expand knowledge by reading book Two before narrow not relied on how except moment myself Dejection assurance. </p>
+							<h1 class="mb-3">Bienvenue dans notre librairie en ligne !</h1>
+							<p class="mb-3">« Savez-vous que votre bibliothèque locale est bien plus qu'un simple endroit où emprunter des livres ? C'est un lieu de découverte, d'apprentissage et d'épanouissement personnel. Que vous soyez à la recherche de ressources pour votre projet de recherche, d'inspiration pour votre prochain projet artistique ou simplement d'un endroit pour vous détendre avec un bon livre, votre bibliothèque locale peut répondre à vos besoins.</p>
 
 							<!-- Search -->
 							<div class="bg-body rounded p-2">
@@ -102,7 +102,6 @@ Page Banner START -->
 </section>
 <!-- =======================
 Page Banner END -->
-
 <!-- =======================
 Page content START -->
 <section class="py-5">
@@ -120,7 +119,10 @@ Page content START -->
 						<div class="card shadow h-100">
 							<div class="position-relative">
 								<!-- Image -->
-								<img :src="`/img/${book.image}`" class="card-img-top">
+
+                                <!-- `/img/${book.image}` -->
+								<img :src=" book.image" class="card-img-top">
+                                <!-- :src="'/images/'  + book.photo" -->
 								<!-- Overlay -->
 								<div class="card-img-overlay d-flex z-index-0 p-3">
 									<!-- Card overlay Top -->
@@ -195,7 +197,7 @@ Action box START -->
 						<!-- Content -->
 						<div class="col-sm-7 col-lg-12 col-xl-7">
 							<!-- Title -->
-							<h3 class="mb-2">Best selling book of the month</h3>
+							<h3 class="mb-2">Le livre le plus vendu du mois</h3>
 							<!-- Rating star -->
 							<ul class="list-inline mb-2">
 								<li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
@@ -206,9 +208,9 @@ Action box START -->
 							</ul>
 
 							<!-- Title and price -->
-							<h6 class="lead fw-bold mb-2">HTML and CSS: Design and Build Websites (Paperback)</h6>
+							<h6 class="lead fw-bold mb-2">La Passion des Maths</h6>
 							<!-- Button -->
-							<a href="#" class="btn btn-sm btn-purple mb-0">Buy now</a>
+							<a href="#" class="btn btn-sm btn-purple mb-0">Acheter maintenant</a>
 						</div>
 					</div> <!-- Row END -->
 				</div>
@@ -224,7 +226,7 @@ Action box START -->
 						<!-- Content -->
 						<div class="col-sm-7 col-lg-12 col-xl-7">
 							<h2 class="mb-1 fs-1">50%OFF</h2>
-							<p class="mb-3 h5 fw-light lead">Enroll now in the most popular and best-rated Books.</p>
+							<p class="mb-3 h5 fw-light lead">Inscrivez-vous dès maintenant aux livres les plus populaires et les mieux notés.</p>
 							<a href="#" class="btn btn-dark mb-0">View Books</a>
 						</div>
 
