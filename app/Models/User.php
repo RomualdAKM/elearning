@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'level_id',
+        'admin'
     ];
 
     /**
@@ -45,5 +46,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
+
 }

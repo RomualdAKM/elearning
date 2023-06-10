@@ -11,9 +11,6 @@ const getSubjects = async () => {
     console.log("subjects", response.data.subjects);
     subjects.value = response.data.subjects;
 };
-// const isLoggedIn = computed(() => {
-//   return localStorage.getItem("token") !== null;
-// })
 
 const isLoggedIn = () => {
     return localStorage.getItem("token") !== null;
@@ -227,7 +224,7 @@ onMounted(  () => {
                                     Out
                                 </button>
                             </li>
-                          
+
                             <li><hr class="dropdown-divider" /></li>
                             <!-- Dark mode options START -->
                             <li>

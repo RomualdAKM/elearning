@@ -112,7 +112,9 @@ const routes = [
         path: '/admin/level',
         component: pagesAdminLevel,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            requiresAdmin: true
+
         }
 
     },
@@ -122,7 +124,9 @@ const routes = [
         path: '/admin/quiz',
         component: pagesAdminQuiz,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            requiresAdmin: true
+
         }
 
     },
@@ -132,7 +136,9 @@ const routes = [
         path: '/admin/learning',
         component: pagesAdminLearning,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            requiresAdmin: true
+
         }
 
     },
@@ -142,7 +148,9 @@ const routes = [
         path: '/admin/category',
         component: pagesAdminCategory,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            requiresAdmin: true
+
         }
 
     },
@@ -152,7 +160,9 @@ const routes = [
         path: '/admin/book',
         component: pagesAdminBook,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            requiresAdmin: true
+
         }
 
     },
@@ -162,7 +172,9 @@ const routes = [
         path: '/admin/chapter',
         component: pagesAdminChapter,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            requiresAdmin: true
+
         }
 
     },
@@ -171,7 +183,9 @@ const routes = [
         path: '/admin',
         component: pagesAdmin,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            requiresAdmin: true
+
         }
 
     },
@@ -181,7 +195,9 @@ const routes = [
         path: '/admin/subject',
         component: pagesAdminSubject,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            requiresAdmin: true
+
         }
 
     },
@@ -190,13 +206,16 @@ const routes = [
         path: '/admin/user',
         component: pagesAdminUser,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            requiresAdmin: true
+
         }
 
     },
 
 
     {
+        name: 'NotFound',
         path: '/:pathMatch(.*)*',
         component: notFound,
         meta: {
@@ -211,15 +230,49 @@ const router = createRouter({
 
 })
 
-router.beforeEach((to, from, next) => {
-    if (to.meta.requiresAuth && !localStorage.getItem('token')) {
-        next({ name: 'Login' })
-    }
 
-    else {
-        next()
+
+// router.beforeEach((to, from, next) => {
+//     const isAdmin = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).admin;
+
+//     if (to.meta.requiresAuth && !localStorage.getItem('token')) {
+//         next({ name: 'Login' });
+//     } else if (to.meta.requiresAdmin && !isAdmin) {
+//         next({ name: 'Accès interdit' }); // Remplacez "Accès interdit" par le nom de votre composant/page d'erreur d'accès interdit
+//     } else {
+//         next();
+//     }
+// })
+
+
+router.beforeEach(async (to, from, next) => {
+    const isAuthenticated = localStorage.getItem('token');
+    let isAdmin = false;
+
+    if (to.meta.requiresAuth && !isAuthenticated) {
+        next({ name: 'Login' });
+    } else {
+        try {
+            const response = await axios.get('/api/user', {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            });
+            isAdmin = response.data.admin;
+        } catch (error) {
+            console.log(error);
+        }
+
+        if (to.meta.requiresAdmin && !isAdmin) {
+            next({ name: 'NotFound' });
+        } else {
+            next();
+        }
     }
-})
+});
+
+
+
 
 
 export default router
