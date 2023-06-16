@@ -39,40 +39,40 @@ Route::controller(SubjectController::class)->group(function () {
     Route::get('get_subject', 'get_subject');
     Route::get('get_subjects/{id}', 'get_subjects');
     //admin
-    Route::middleware('admin')->group(function () {
+   
 
         Route::get('search_subject', 'search_subject');
         Route::post('create_subject', 'create_subject');
         Route::post('update_subject/{id}', 'update_subject');
         Route::get('delete_subject/{id}', 'delete_subject');
-    });
+  
 });
 
 Route::controller(LearningController::class)->group(function () {
 
     Route::get('get_learning/{name}', 'get_learning');
         //admin
-        Route::middleware('admin')->group(function () {
+      
 
             Route::get('get_learnings', 'get_learnings');
             Route::get('search_learning', 'search_learning');
             Route::post('create_learning', 'create_learning');
             Route::post('update_learning/{id}', 'update_learning');
             Route::get('delete_learning/{id}', 'delete_learning');
-    });
+   
 });
 
 Route::controller(ChapterController::class)->group(function () {
     Route::get('get_chaptervideos/{id}', 'get_chaptervideos');
     Route::get('get_quizzes/{name}', 'get_quizzes');
         //admin
-        Route::middleware('admin')->group(function () {
+       
             Route::get('get_chapters', 'get_chapters');
             Route::post('create_chapter', 'create_chapter');
             Route::post('update_chapter/{id}', 'update_chapter');
             Route::get('delete_chapter/{id}', 'delete_chapter');
             Route::get('search_chapter', 'search_chapter');
-    });
+ 
 
 });
 
@@ -81,11 +81,11 @@ Route::controller(LevelController::class)->group(function ()
     Route::get('get_levels', 'get_levels');
 
                 //admin
-    Route::middleware('admin')->group(function () {
+   
             Route::post('create_level', 'create_level');
             Route::post('update_level/{id}', 'update_level');
             Route::get('delete_level/{id}', 'delete_level');
-    });
+   
 });
 
 Route::controller(BookController::class)->group(function(){
@@ -95,34 +95,34 @@ Route::controller(BookController::class)->group(function(){
     Route::get('search_book', 'search_book');
 
                         //admin
- Route::middleware('admin')->group(function () {
+ 
             Route::get('get_books', 'get_books');
             Route::post('create_book', 'create_book');
             Route::post('update_book/{id}', 'update_book');
             Route::get('delete_book/{id}', 'delete_book');
-    });
+  
 });
 
 Route::controller(QuizController::class)->group(function(){
     //admin
     Route::get('get_quizzes','get_quizzes');
     Route::get('search_quiz', 'search_quiz');
-    Route::middleware('admin')->group(function () {
+   
             Route::post('create_quiz', 'create_quiz');
             Route::post('update_quiz/{id}', 'update_quiz');
             Route::get('delete_quiz/{id}', 'delete_quiz');
-    });
+   
 });
 
 Route::controller(CategoryController::class)->group(function(){
 
                                         //admin
-     Route::middleware('admin')->group(function () {
+    
             Route::get('get_categories', 'get_categories');
             Route::post('create_category', 'create_category');
             Route::post('update_category/{id}', 'update_category');
             Route::get('delete_category/{id}', 'delete_category');
-    });
+  
 });
 
 Route::resource('chat',ChatController::class);

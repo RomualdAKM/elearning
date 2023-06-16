@@ -1,9 +1,10 @@
 <script setup>
-import { onMounted,computed, ref } from "vue";
+import { onMounted, ref } from "vue";
 import router from "./../../../router/index.js";
 
 let subjects = ref([]);
 const level_id = ref()
+const name_user = ref()
 
 
 const getSubjects = async () => {
@@ -32,10 +33,13 @@ onMounted(  () => {
     })
         .then(response => {
             level_id.value = response.data.level_id
-            console.log('infoo', response.data.level_id);
+            name_user.value = response.data.name
+            console.log('infoo', response.data.name);
             getSubjects()
         })
 })
+
+
 
 </script>
 
@@ -140,7 +144,7 @@ onMounted(  () => {
                             </ul>
                         </li>
 
-                         <li class="nav-link btn btn-white p-1" v-if="isNotLoggedIn()">
+                         <li class="nav-link btn btn-warning p-1" v-if="isNotLoggedIn()">
                             <router-link :to="{ name: 'Login' }"
                                 >Login</router-link
                             >
@@ -156,9 +160,9 @@ onMounted(  () => {
                 >
                     <!-- Wishlist START -->
                     <li class="nav-item ms-0 ms-sm-2 d-none d-sm-block">
-                        <a class="btn btn-light btn-round mb-0" href="#">
-                            <i class="bi bi-heart fa-fw"></i
-                        ></a>
+                        <router-link class="btn btn-light btn-round mb-0" :to="{ name: 'Chat' }">
+                             <i class="bi bi-envelope-heart"></i>
+                         </router-link>
                     </li>
                     <!-- Wishlist END -->
 
@@ -166,7 +170,7 @@ onMounted(  () => {
                     <li class="nav-item ms-3 dropdown">
                         <!-- Avatar -->
                         <a
-                            class="avatar avatar-sm p-0"
+
                             href="#"
                             id="profileDropdown"
                             role="button"
@@ -175,11 +179,7 @@ onMounted(  () => {
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
-                            <img
-                                class="avatar-img rounded-circle"
-                                src="assets/images/avatar/01.jpg"
-                                alt="avatar"
-                            />
+                            <i class="bi bi-person-fill"></i>
                         </a>
 
                         <!-- Profile dropdown START -->
@@ -190,30 +190,16 @@ onMounted(  () => {
                             <!-- Profile info -->
                             <li class="px-3 mb-3">
                                 <div class="d-flex align-items-center">
-                                    <!-- Avatar -->
-                                    <div class="avatar me-3">
-                                        <img
-                                            class="avatar-img rounded-circle shadow"
-                                            src="assets/images/avatar/01.jpg"
-                                            alt="avatar"
-                                        />
-                                    </div>
+
                                     <div>
-                                        <a class="h6" href="#">Lori Ferguson</a>
-                                        <p class="small m-0">
-                                            example@gmail.com
-                                        </p>
+                                        <a class="h6" href="#">{{name_user}}</a>
+
                                     </div>
                                 </div>
                             </li>
                             <!-- Links -->
                             <li><hr class="dropdown-divider" /></li>
-                            <li>
-                                <a class="dropdown-item" href="#"
-                                    ><i class="bi bi-person fa-fw me-2"></i>Edit
-                                    Profile</a
-                                >
-                            </li>
+
 
                             <li >
                                 <button
@@ -308,25 +294,5 @@ onMounted(  () => {
 
         <hr class="my-0" />
 
-        <!-- Category Nav link START -->
-        <nav class="navbar navbar-expand-xl nav-category">
-            <div class="container px-0">
-                <!-- Responsive navbar toggler -->
-                <button
-                    class="navbar-toggler m-auto w-100"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse2"
-                    aria-controls="navbarCollapse2"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <i class="bi bi-grid-fill"></i> Category
-                </button>
-
-                <!-- Main navbar END -->
-            </div>
-        </nav>
-        <!-- Category Nav link END -->
     </header>
 </template>

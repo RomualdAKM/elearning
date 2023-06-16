@@ -62,11 +62,12 @@ onMounted(() => {
 
 </script>
 <template>
-	<div class="container-fluid mt-5">
+	<div class="container mt-5">
 
 				<div class="col-md-8 col-xl-12 chat">
+                   
 					<div class="card">
-						<div class="card-header msg_head">
+						<div >
 							<div class="d-flex bd-highlight">
 
 								<div class="user_info">

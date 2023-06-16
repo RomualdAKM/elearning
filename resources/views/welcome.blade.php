@@ -5,7 +5,7 @@
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1">
 
-				<title>Laravel</title>
+				<title>EdupMe</title>
 
 				<!-- Fonts -->
 				<link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -51,8 +51,7 @@
 				<script src="{{ asset('assets/js/functions.js') }}"></script>
 
 				<!-- Dark Mode -->
-				<script>
-
+		<script>
 								const storedTheme = localStorage.getItem('theme')
 
 								const getPreferredTheme = () => {
@@ -119,8 +118,8 @@
 
 				<div id="app"></div>
 
-    @vite('resources/js/app.js')
- {{-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+				@vite('resources/js/app.js')
+				{{-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     --}}
 </body>
 

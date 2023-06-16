@@ -57,16 +57,16 @@ Main banner START -->
           <div class="col-xl-6 text-center">
             <!-- Badge title -->
             <h6
-              class="mb-3 font-base bg-blue text-white py-2 px-4 rounded-2 d-inline-block"
+              class="mb-3 font-base bg-warning text-white py-2 px-4 rounded-2 d-inline-block"
             >
               <i class="fas fa-school me-2"></i>
               <!-- Pour Tous Les Collègues -->
-              Bienvenue sur AppAide !
+              Bienvenue sur EduqMe !
             </h6>
             <!-- Title -->
             <!-- <h1>La meilleure école secondaire que vous puissiez obtenir</h1> -->
             <h3>
-              Réussissez votre parcours scolaire avec notre plateforme d'e-learning et sa bibliothèque électronique riche en contenu.
+              Dominez vos études grâce à notre plateforme e-learning et sa bibliothèque électronique de contenu riche.
             </h3>
             <!-- <p class="mb-5">
               Le meilleur choix rentable pour les parents recherchant une
@@ -86,18 +86,18 @@ Main banner START -->
                     <i class="fas fa-user-graduate fa-fw"></i>
                   </div>
                   <div class="ms-3">
-                    <div class="d-flex text-dark">
+                    <div class="d-flex text-warning">
                       <h5
-                        class="purecounter mb-0 fw-bold"
+                        class="purecounter mb-0 fw-bold text-warning"
                         data-purecounter-start="0"
                         data-purecounter-end="1"
                         data-purecounter-delay="500"
                       >
-                        0
+                        200
                       </h5>
-                      <span class="mb-0 h5">K</span>
+                      <span class="mb-0 h5 text-warning">K</span>
                     </div>
-                    <span class="mb-0">Nombre total d'apprenant</span>
+                    <span class="mb-0 ">Nombre total d'apprenant</span>
                   </div>
                 </div>
               </div>
@@ -113,12 +113,12 @@ Main banner START -->
                   </div>
                   <div class="ms-3 text-start">
                     <h5
-                      class="purecounter mb-0 fw-bold"
+                      class="purecounter mb-0 fw-bold text-warning"
                       data-purecounter-start="0"
                       data-purecounter-end="105"
                       data-purecounter-delay="300"
                     >
-                      0
+                      50
                     </h5>
                     <span class="mb-0">Nombre total d'instructeurs</span>
                   </div>
@@ -137,14 +137,14 @@ Main banner START -->
                   <div class="ms-3">
                     <div class="d-flex text-dark">
                       <h5
-                        class="purecounter mb-0 fw-bold"
+                        class="purecounter mb-0 fw-bold text-warning"
                         data-purecounter-start="0"
                         data-purecounter-end="2"
                         data-purecounter-delay="300"
                       >
-                        0
+                        40
                       </h5>
-                      <span class="mb-0 h5">K+</span>
+                      <span class="mb-0 h5 text-warning" >K+</span>
                     </div>
                     <span class="mb-0">Nombre total d'activités</span>
                   </div>
@@ -1379,7 +1379,7 @@ Counter START -->
                           data-purecounter-end="89"
                           data-purecounter-delay="200"
                         >
-                          0
+                          50
                         </h4>
                       </div>
                       <h6 class="text-dark mb-0 fw-bold">
@@ -1396,7 +1396,7 @@ Counter START -->
                           data-purecounter-end="12"
                           data-purecounter-delay="200"
                         >
-                          0
+                          200
                         </h4>
                       </div>
                       <h6 class="text-dark mb-0 fw-bold">
@@ -1413,7 +1413,7 @@ Counter START -->
                           data-purecounter-end="180"
                           data-purecounter-delay="200"
                         >
-                          0
+                          20
                         </h4>
                         <span class="display-6 text-white mb-0">K</span>
                       </div>
@@ -1431,7 +1431,7 @@ Counter START -->
                           data-purecounter-end="23"
                           data-purecounter-delay="200"
                         >
-                          0
+                          30
                         </h4>
                         <span class="display-6 text-white mb-0">+</span>
                       </div>
@@ -1489,7 +1489,7 @@ Contact form START -->
                       href="#"
                       class="text-primary-hover fw-light stretched-link"
                     >
-                      example@gmail.com
+                      eduqme@gmail.com
                     </a>
                   </p>
                 </div>
@@ -1509,7 +1509,7 @@ Contact form START -->
                       href="#"
                       class="text-primary-hover fw-light stretched-link"
                     >
-                      +256 359 556
+                      +229 91303142
                     </a>
                   </p>
                 </div>
@@ -1549,7 +1549,7 @@ Contact form START -->
                       href="#"
                       class="text-primary-hover fw-light stretched-link"
                     >
-                      http://example.com
+                      http://eduqme.com
                     </a>
                   </p>
                 </div>

@@ -2,7 +2,7 @@
 
   <!-- =======================
 Footer START -->
-<footer class="pt-0 bg-success position-relative overflow-hidden">
+<footer class="pt-0 bg-warning position-relative overflow-hidden" >
 	<!-- Curve SVG decoration -->
 	<figure class="mb-0">
 		<svg class="fill-body rotate-180" width="100%" height="150" viewBox="0 0 500 150" preserveAspectRatio="none">
@@ -82,8 +82,8 @@ Footer START -->
 		<div class="row">
 			<div class="col-lg-6 mx-auto text-center mb-5">
 				<!-- Logo -->
-				<a href="index-2.html"> <h1><span style="color: #fd7e14">A</span><span style="color: #fff">ppAide</span></h1> </a>
-				<p class="mt-3 text-white">AppAide est un thème éducatif conçu spécifiquement pour les centres d'éducation dédiés à l'enseignement et à l'implication des apprenants.</p>
+				<a href="index-2.html"> <h1><span style="color: #fd7e14">E</span><span style="color: #fff">duqMe</span></h1> </a>
+				<p class="mt-3 text-white">EduqMe est un thème éducatif conçu spécifiquement pour les centres d'éducation dédiés à l'enseignement et à l'implication des apprenants.</p>
 
 				<!-- Links -->
         <ul class="nav justify-content-center justify-content-center text-primary-hover mt-3 mt-md-0">
